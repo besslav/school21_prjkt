@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*   ft_list_push_front.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 22:30:24 by pskip             #+#    #+#             */
-/*   Updated: 2021/07/31 22:30:27 by pskip            ###   ########.fr       */
+/*   Created: 2021/08/05 22:13:43 by pskip             #+#    #+#             */
+/*   Updated: 2021/08/05 22:13:46 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ABS_H
-# define FT_ABS_H
+#include "ft_list.h"
 
-# define ABS(x) (x * (1 - 2*(x < 0)))
+void	ft_list_push_front(t_list **begin_list, void *data)
+{
+	t_list	*elem;
 
-#endif
+	elem = ft_create_elem (data);
+	elem->next = *begin_list;
+	begin_list = &elem;
+}

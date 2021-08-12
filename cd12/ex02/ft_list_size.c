@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*   ft_list_size.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 22:30:24 by pskip             #+#    #+#             */
-/*   Updated: 2021/07/31 22:30:27 by pskip            ###   ########.fr       */
+/*   Created: 2021/08/05 22:14:20 by pskip             #+#    #+#             */
+/*   Updated: 2021/08/05 22:14:24 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ABS_H
-# define FT_ABS_H
+#include "ft_list.h"
 
-# define ABS(x) (x * (1 - 2*(x < 0)))
+int	ft_list_size(t_list *begin_list)
+{
+	t_list	elem;
+	int		i;
 
-#endif
+	if (!begin_list)
+		return (0);
+	elem = *begin_list;
+	i = 1;
+	while (elem.next != 0)
+	{
+		i++;
+		elem = *elem.next;
+	}
+	return (i);
+}

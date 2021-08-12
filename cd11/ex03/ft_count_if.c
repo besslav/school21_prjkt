@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*   ft_count_if.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 22:30:24 by pskip             #+#    #+#             */
-/*   Updated: 2021/07/31 22:30:27 by pskip            ###   ########.fr       */
+/*   Created: 2021/08/04 23:11:56 by pskip             #+#    #+#             */
+/*   Updated: 2021/08/04 23:11:58 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ABS_H
-# define FT_ABS_H
+int	ft_count_if(char **tab, int length, int(*f)(char*))
+{
+	int	i;
+	int	ans;
 
-# define ABS(x) (x * (1 - 2*(x < 0)))
-
-#endif
+	i = 0;
+	ans = 0;
+	while (i < length)
+	{
+		if ((*f)(tab[i]))
+			ans++;
+		i++;
+	}
+	return (ans);
+}

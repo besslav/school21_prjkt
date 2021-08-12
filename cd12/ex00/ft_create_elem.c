@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*   ft_create_elem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 22:30:24 by pskip             #+#    #+#             */
-/*   Updated: 2021/07/31 22:30:27 by pskip            ###   ########.fr       */
+/*   Created: 2021/08/05 22:13:07 by pskip             #+#    #+#             */
+/*   Updated: 2021/08/05 22:13:10 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ABS_H
-# define FT_ABS_H
+#include <stdlib.h>
+#include "ft_list.h"
 
-# define ABS(x) (x * (1 - 2*(x < 0)))
+t_list	*ft_create_elem(void *data)
+{
+	t_list	*begin;
+	t_list	elem1;
 
-#endif
+	begin = (t_list *)malloc(sizeof(t_list));
+	elem1.next = 0;
+	elem1.data = data;
+	*begin = elem1;
+	return (begin);
+}

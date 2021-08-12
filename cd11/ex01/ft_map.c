@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*   ft_map.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 22:30:24 by pskip             #+#    #+#             */
-/*   Updated: 2021/07/31 22:30:27 by pskip            ###   ########.fr       */
+/*   Created: 2021/08/04 23:11:25 by pskip             #+#    #+#             */
+/*   Updated: 2021/08/04 23:11:30 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ABS_H
-# define FT_ABS_H
+int	*ft_map(int *tab, int length, int(*f)(int))
+{
+	int	i;
+	int	*ans;
 
-# define ABS(x) (x * (1 - 2*(x < 0)))
-
-#endif
+	i = 0;
+	ans = (int *)malloc (sizeof(int) * (length));
+	while (i < length)
+	{
+		ans[i] = (*f)(tab[i]);
+		i++;
+	}
+	return (ans);
+}

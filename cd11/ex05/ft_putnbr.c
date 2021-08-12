@@ -1,18 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 22:30:24 by pskip             #+#    #+#             */
-/*   Updated: 2021/07/31 22:30:27 by pskip            ###   ########.fr       */
+/*   Created: 2021/08/04 18:54:08 by pskip             #+#    #+#             */
+/*   Updated: 2021/08/04 18:54:11 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ABS_H
-# define FT_ABS_H
+#include <unistd.h>
 
-# define ABS(x) (x * (1 - 2*(x < 0)))
+void	ft_putnbr(int nb)
+{
+	char	out[10];
+	int		ind;
 
-#endif
+	if (nb == 0)
+		write(1, "0", 1);
+	ind = 10;
+	if (nb < 0)
+	{
+		ind--;
+		write(1, "-", 1);
+		out[ind] = (nb % 10) * (-1) + 48;
+		nb = -(nb / 10);
+	}
+	while (nb != 0)
+	{
+		ind--;
+		out[ind] = (nb % 10) + 48;
+		nb = nb / 10;
+	}
+	while (ind < 10)
+	{
+		write(1, &out[ind], 1);
+		ind++;
+	}
+}

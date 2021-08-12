@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*   opers.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 22:30:24 by pskip             #+#    #+#             */
-/*   Updated: 2021/07/31 22:30:27 by pskip            ###   ########.fr       */
+/*   Created: 2021/08/04 23:10:45 by pskip             #+#    #+#             */
+/*   Updated: 2021/08/04 23:10:47 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ABS_H
-# define FT_ABS_H
+#ifndef OPERS_H
+# define OPERS_H
 
-# define ABS(x) (x * (1 - 2*(x < 0)))
+int	add(int a, int b);
+int	minus(int a, int b);
+int	multi(int a, int b);
+int	div(int a, int b);
+int	mod(int a, int b);
 
 #endif

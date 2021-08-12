@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*   infa_map.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pskip <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: ymaragre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/31 22:30:24 by pskip             #+#    #+#             */
-/*   Updated: 2021/07/31 22:30:27 by pskip            ###   ########.fr       */
+/*   Created: 2021/08/10 19:08:43 by ymaragre          #+#    #+#             */
+/*   Updated: 2021/08/10 19:09:32 by ymaragre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ABS_H
-# define FT_ABS_H
+#ifndef INFA_MAP_H
+# define INFA_MAP_H
 
-# define ABS(x) (x * (1 - 2*(x < 0)))
+typedef struct s_inf
+{
+	int		count_str;
+	int		len_str;
+	char	empty;
+	char	obstacle;
+	char	full;
+	char	**map;
+	int		**map_bi;
+}	t_inf;
 
 #endif
