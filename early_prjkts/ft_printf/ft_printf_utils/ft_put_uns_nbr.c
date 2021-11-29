@@ -6,22 +6,13 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 18:00:20 by pskip             #+#    #+#             */
-/*   Updated: 2021/10/28 21:32:41 by pskip            ###   ########.fr       */
+/*   Updated: 2021/11/27 22:26:50 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "../ft_printf.h"
 
-static void	ft_rev_unswr(char *pre, int n)
-{
-	int	endind;
-
-	endind = 0;
-	while (--n >= endind)
-		write(1, &pre[n], 1);
-}
-
-int	ft_put_uns_nbr_fd(unsigned int n)
+int	ft_put_uns_nbr(unsigned int n, t_list data)
 {
 	int		lenn;
 	char	pre[10];
@@ -34,11 +25,10 @@ int	ft_put_uns_nbr_fd(unsigned int n)
 		pre[lenn++] = (n % 10) + 48;
 		n = n / 10;
 	}
-	ft_rev_unswr(pre, lenn);
-	return (lenn);
+	return (ft_print_num(pre, lenn, data));
 }
 
-int	ft_put_16x_nbr_fd(unsigned int n)
+int	ft_put_16x_nbr(unsigned int n, t_list data)
 {
 	int		lenn;
 	char	pre[11];
@@ -53,11 +43,10 @@ int	ft_put_16x_nbr_fd(unsigned int n)
 		pre[lenn++] = dict[(n % 16)];
 		n = n / 16;
 	}
-	ft_rev_unswr(pre, lenn);
-	return (lenn);
+	return (ft_print_num(pre, lenn, data));
 }
 
-int	ft_put_16Xx_nbr_fd(unsigned int n)
+int	ft_put_16Xx_nbr(unsigned int n, t_list data)
 {
 	int		lenn;
 	char	pre[11];
@@ -72,11 +61,10 @@ int	ft_put_16Xx_nbr_fd(unsigned int n)
 		pre[lenn++] = dict[(n % 16)];
 		n = n / 16;
 	}
-	ft_rev_unswr(pre, lenn);
-	return (lenn);
+	return (ft_print_num(pre, lenn, data));
 }
 
-int	ft_putpointe_fd(unsigned long long int n)
+int	ft_putpointer(unsigned long long int n, t_list data)
 {
 	int		lenn;
 	char	pre[20];
@@ -91,7 +79,7 @@ int	ft_putpointe_fd(unsigned long long int n)
 		pre[lenn++] = dict[(n % 16)];
 		n = n / 16;
 	}
-	write(1, "0x", 2);
-	ft_rev_unswr(pre, lenn);
-	return (lenn + 2);
+	data.extra = 'x';
+	data.extra_len = 2;
+	return (ft_print_num(pre, lenn, data));
 }

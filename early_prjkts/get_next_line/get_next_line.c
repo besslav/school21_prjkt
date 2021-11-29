@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 13:00:17 by pskip             #+#    #+#             */
-/*   Updated: 2021/10/24 15:14:07 by pskip            ###   ########.fr       */
+/*   Updated: 2021/11/12 19:03:04 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*line_with_extra(char *line, int fd)
 	while (!ft_strchr(line, '\n') && byte_read != 0)
 	{
 		byte_read = read(fd, baff, BUFFER_SIZE);
+		printf("start: %s\n", baff);
 		if (byte_read == -1)
 		{
 			free(baff);
@@ -102,15 +103,10 @@ int main()
 	i = 1;
 	while (i < 7)
 	{
-		line = get_next_line(fd1);
-		printf("f1 i=%d (%s)", i, line);
-		free(line);
 		line = get_next_line(fd2);
-		printf("f2 i=%d (%s)", i, line);
+		//printf("f1 i=%d (%s)", i, line);
 		free(line);
-		line = get_next_line(fd3);
-		printf("f3 i=%d (%s)", i, line);
-		free(line);
+
 		i++;
 	}
 	close(fd1);
