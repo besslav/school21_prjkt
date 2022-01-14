@@ -6,16 +6,16 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:49:53 by pskip             #+#    #+#             */
-/*   Updated: 2021/12/15 19:10:09 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/10 21:20:41 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-static char	*ft_substr(char const *s, unsigned int start, int len)
+static char	*ft_substr(char const *s, int start, int len)
 {
 	char	*save;
-	int	ind;
+	int		ind;
 
 	ind = 0;
 	if (!s)
@@ -40,7 +40,6 @@ static char	*ft_substr(char const *s, unsigned int start, int len)
 	}
 	return (save);
 }
-
 
 static int	n_words(char const *s, char c)
 {
@@ -68,16 +67,6 @@ static int	wlen(char const *s, int start, char c)
 	while (s[start + ind] && s[start + ind] != c)
 		ind++;
 	return (ind);
-}
-
-void	cleaner(char **cleanit, int ind)
-{
-	while (ind <= 0)
-	{
-		ind--;
-		free(cleanit[ind]);
-	}
-	free(cleanit);
 }
 
 static char	**ft_split_cont(char const *s, char c, char	**ans)

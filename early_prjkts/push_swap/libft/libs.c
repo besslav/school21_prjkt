@@ -1,16 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libs.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/10 21:19:15 by pskip             #+#    #+#             */
+/*   Updated: 2022/01/11 18:01:23 by pskip            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../push_swap.h"
 
-int	*numcpy(int *sors)
+int	*numcpy(int *sors, int len)
 //copy from strfr to strto no more then n-1 symbol and add \0 to the end.
 {
 	int		ind;
-	int		len;
 	int		*sortit;
 
-	len = mass_len(sors);
 	ind = 0;
-	sortit = (int *)malloc (sizeof(int) * (len + 1));
-	while (sors[ind])
+	sortit = (int *)malloc (sizeof(int) * len);
+	while (ind < len)
 	{
 		sortit[ind] = sors[ind];
 		ind++;
@@ -18,7 +28,7 @@ int	*numcpy(int *sors)
 	return (sortit);
 }
 
-int	ft_strlen(char **string)
+int	ft_numslen(char **string)
 // len of string
 {
 	int	lenstring;
@@ -29,21 +39,22 @@ int	ft_strlen(char **string)
 	return (lenstring);
 }
 
-int	mass_len(int *mass)
+int	ft_strlen(const char *string)
+// len of string
 {
-	int	len;
+	int	lenstring;
 
-	len = 0;
-	while (mass[len])
-		len++;
-	return (len);
+	lenstring = 0;
+	while (string[lenstring] != '\0')
+		lenstring++;
+	return (lenstring);
 }
 
 int	ft_atoi(char *str)
 {
-	int		i;
-	int		sign;
-	int		ans;
+	int				i;
+	int				sign;
+	long int		ans;
 
 	ans = 0;
 	i = 0;
@@ -53,31 +64,38 @@ int	ft_atoi(char *str)
 		sign = sign * -1;
 		i++;
 	}
+	if (*(str + i) == '+' && sign != -1)
+		i++;
 	while ((*(str + i) >= '0') && (*(str + i) <= '9'))
 	{
 		ans = (ans * 10) + (*(str + i) - 48);
 		i++;
+		if (ans < -2147483648 || ans > 2147483647)
+		{
+			write(2, "its too big, sempai\n", 20);
+			exit (EXIT_FAILURE);
+		}
 	}
-	return (ans * sign);
+	return ((int)ans * sign);
 }
 
-char	*ft_strjoin(int *s1, int *s2, int s1len, int s2len)
+int	*ft_strjoin(int *s1, int *s2, int s1len, int s2len)
 {
-	char	*news;
+	int	*news;
 	int	ind;
 
 	ind = -1;
 	if (!s1 || !s2)
-		return (0);
-
+		exit (EXIT_FAILURE);
 	news = (int *)malloc((s1len + s2len) * sizeof(int));
 	if (news == NULL)
-		return (NULL);
+		exit (EXIT_FAILURE);
 	while (++ind < s1len)
 		news[ind] = s1[ind];
 	ind = -1;
 	while (++ind < s2len)
 		news[s1len + ind] = s2[ind];
 	free(s1);
+	free(s2);
 	return (news);
 }

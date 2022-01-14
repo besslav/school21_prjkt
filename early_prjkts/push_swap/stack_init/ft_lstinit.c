@@ -6,57 +6,50 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 16:48:03 by pskip             #+#    #+#             */
-/*   Updated: 2021/12/11 13:09:05 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/13 19:08:00 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
 
-t_stack	*ft_lstnew(int *content)
+t_stack	*ft_lstnew(int content)
 {
 	t_stack	*begin;
 
 	begin = (t_stack *)malloc(sizeof(t_stack));
 	if (begin == NULL)
-		return (NULL);
+		exit (EXIT_FAILURE);
 	begin->content = content;
 	begin->next = begin;
 	begin->prev = begin;
+	begin->combo_prev = begin;
+	begin->best_combo = 1;
+	begin->a_steps = 0;
+	begin->b_steps = 0;
+	begin->a_best_steps = -1;
+	begin->b_best_steps = -1;
 	return (begin);
 }
 
-void	ft_lstadd_front(t_stack *lst, t_stack *new)
+void	init_stack(int *mass, int *sorted, t_meta *data)
 {
-	lst->prev->next = new;
-	new->next = lst;
-}
+	int		ind;
+	t_stack	*a_start;
 
-void	ft_lstadd_back(t_stack *lst, t_stack *new)
-{
-	new->next = lst;
-	new->prev = lst->prev;
-	lst = new;
-}
-
-int	ft_lstsize(t_stack *lst)
-{
-	int		list_len;
-	t_stack	*start;
-
-	start = lst;
-	if (lst == lst->next)
-		return (1);
-	list_len = 1;
-	lst = lst->next;
-	while (lst != start)
+	ind = 0;
+	data->a = ft_lstnew(mass[0]);
+	data->a->real_ind = find_ind(data->a->content, sorted);
+	a_start = data->a;
+	while (++ind < data->len)
 	{
-		list_len++;
-		lst = lst->next;
+		data->a->next = ft_lstnew(mass[ind]);
+		data->a->next->prev = data->a;
+		data->a = data->a->next;
+		data->a->real_ind = find_ind(data->a->content, sorted);
 	}
-	return (list_len);
-}
-
-t_meta	*init_stack(int ac, char **av)
-{
-	
+	data->a->next = a_start;
+	a_start = data->a;
+	data->a = data->a->next;
+	data->a->prev = a_start;
+	data->b = NULL;
 }
