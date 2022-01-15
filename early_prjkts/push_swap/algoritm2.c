@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 18:40:25 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/13 21:47:54 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/15 22:24:59 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ static void	find_best_way_continue(t_stack *elem, int a_size, int b_size)
 	if (elem->a_steps + b_rev < elem->best_sum)
 	{
 		elem->b_dir = -1;
+		elem->a_dir = 1;
 		elem->b_best_steps = b_rev;
+		elem->a_best_steps = elem->a_steps;
 		elem->best_sum = elem->a_steps + b_rev;
 	}
 	if (a_rev + elem->b_steps < elem->best_sum)
 	{
 		elem->a_dir = -1;
+		elem->b_dir = 1;
 		elem->a_best_steps = a_rev;
+		elem->b_best_steps = elem->b_steps;
 		elem->best_sum = a_rev + elem->b_steps;
 	}
 }
@@ -63,12 +67,9 @@ static void	find_best_way(t_stack *elem, int a_size, int b_size)
 	find_best_way_continue(elem, a_size, b_size);
 }
 
-static void	count_steps_in_a (t_stack *elem, t_stack *a)
+static void	count_steps_in_a(t_stack *elem, t_stack *a)
 {
-	if ((a->real_ind > elem->real_ind && a->prev->real_ind < elem->real_ind)
-		|| (a->real_ind < a->prev->real_ind && ((a->real_ind > elem->real_ind
-		&& a->prev->real_ind > elem->real_ind)
-		|| (a->real_ind < elem->real_ind && a->prev->real_ind < elem->real_ind))))
+	if (norma_adapt(elem, a))
 	{
 		elem->a_steps = 0;
 		elem->a_dir = 0;
@@ -77,10 +78,7 @@ static void	count_steps_in_a (t_stack *elem, t_stack *a)
 	{
 		elem->a_dir = 1;
 		elem->a_steps = 0;
-		while (!((a->real_ind > elem->real_ind && a->prev->real_ind < elem->real_ind)
-			|| (a->real_ind < a->prev->real_ind && (
-			(a->real_ind > elem->real_ind && a->prev->real_ind > elem->real_ind)
-			|| (a->real_ind < elem->real_ind && a->prev->real_ind < elem->real_ind)))))       
+		while (!(norma_adapt(elem, a)))
 		{
 			elem->a_steps++;
 			a = a->next;
@@ -91,7 +89,6 @@ static void	count_steps_in_a (t_stack *elem, t_stack *a)
 static void	count_all_steps(t_meta *data, t_stack *on_count)
 {
 	t_stack	*start;
-	int		best;
 
 	on_count->b_dir = 0;
 	ground_zero(on_count);
@@ -114,12 +111,11 @@ static void	count_all_steps(t_meta *data, t_stack *on_count)
 		find_best_way(on_count, data->a_size, data->b_size);
 		on_count = on_count->next;
 	}
-
 }
 
 t_stack	*algo_base(t_meta *data)
 {
-	t_stack *on_count;
+	t_stack	*on_count;
 	t_stack	*for_push;
 
 	on_count = data->b;
@@ -132,7 +128,7 @@ t_stack	*algo_base(t_meta *data)
 		read_best_sum(on_count);
 		if (on_count->best_sum < for_push->best_sum)
 			for_push = on_count;
-		on_count = on_count->next;		
+		on_count = on_count->next;
 	}
 	return (for_push);
 }

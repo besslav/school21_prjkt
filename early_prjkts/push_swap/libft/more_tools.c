@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 21:18:52 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/12 19:39:32 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/15 17:32:19 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,6 @@ int	find_ind(int num, int *sorted)
 	while (!(sorted[ind] == num))
 		ind++;
 	return (ind);
-}
-
-void	cleaner(char **cleanit, int ind)
-{
-	while (ind >= 0)
-		free(cleanit[ind--]);
-	free(cleanit);
 }
 
 int	check_if_elem_in_subcombo(int *subcombo, t_meta *data)
@@ -52,18 +45,22 @@ void	read_best_sum(t_stack *on_count)
 
 void	ground_zero(t_stack *on_count)
 {
-	t_stack *next;
 	on_count->a_best_steps = -1;
 	on_count->b_best_steps = -1;
 	on_count->a_steps = 0;
 	on_count->b_steps = 0;
-	next = on_count->next;
-	while (next != on_count)
-	{
-		on_count->a_best_steps = -1;
-		on_count->b_best_steps = -1;
-		on_count->a_steps = 0;
-		on_count->b_steps = 0;
-		next = next->next;		
-	}
+	on_count->best_sum = 0;
+}
+
+int	norma_adapt(t_stack *elem, t_stack *a)
+{
+	if (((a->real_ind > elem->real_ind
+				&& a->prev->real_ind < elem->real_ind)
+			|| (a->real_ind < a->prev->real_ind
+				&& ((a->real_ind > elem->real_ind
+						&& a->prev->real_ind > elem->real_ind)
+					|| (a->real_ind < elem->real_ind
+						&& a->prev->real_ind < elem->real_ind)))))
+		return (1);
+	return (0);
 }

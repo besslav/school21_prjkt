@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 21:18:28 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/13 15:51:25 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/15 22:26:03 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	pa(t_meta *data)
 		else
 		{
 			data->a = ft_lstnew(save->content);
+			free(save);
 			data->a->real_ind = save->real_ind;
 		}
 		data->a_size++;
@@ -67,10 +68,13 @@ void	pb(t_meta *data)
 			data->a = del_one(data->a);
 		data->a_size--;
 		if (data->b)
+		{
 			data->b = add_one(data->b, save);
+		}
 		else
 		{
 			data->b = ft_lstnew(save->content);
+			free(save);
 			data->b->real_ind = save->real_ind;
 		}
 		data->b_size++;

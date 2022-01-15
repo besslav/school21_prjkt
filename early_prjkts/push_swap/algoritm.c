@@ -1,4 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algoritm.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/15 22:34:49 by pskip             #+#    #+#             */
+/*   Updated: 2022/01/15 22:34:50 by pskip            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
+
+void	pb_rb(t_meta *data)
+{
+	pb(data);
+	if (data->b->real_ind < (data->a_size + data->b_size) / 2)
+		r_ab(data, 'b');
+}
 
 static void	check_first(t_stack *start, int *best)
 {
@@ -29,7 +48,6 @@ static void	check_first(t_stack *start, int *best)
 		*best = start->prev->best_combo;
 }
 
-
 static int	*find_best(t_meta *data)
 {
 	t_stack	*start;
@@ -37,7 +55,6 @@ static int	*find_best(t_meta *data)
 	int		*save;
 
 	start = data->a;
-
 	data->len = 1;
 	check_first(start, &data->len);
 	start = start->next;
@@ -46,7 +63,7 @@ static int	*find_best(t_meta *data)
 		check_first(start, &data->len);
 		start = start->next;
 	}
-	while(start->best_combo != data->len)
+	while (start->best_combo != data->len)
 		start = start->next;
 	check_first(start->next, &data->len);
 	step_in_save = data->len - 1;
@@ -63,20 +80,17 @@ void	algo_start(t_meta *data)
 {
 	int		*a_save;
 	t_stack	*break_point;
-	int		all_len_save;
 
-	all_len_save = data->len;
-	data->a_size = all_len_save;
 	a_save = find_best(data);
 	data->b_size = 0;
 	while (!check_if_elem_in_subcombo(a_save, data))
-		pb(data);
+		pb_rb(data);
 	break_point = data->a;
 	r_ab(data, 'a');
 	while (data->a != break_point)
 	{
 		if (!check_if_elem_in_subcombo(a_save, data))
-			pb(data);
+			pb_rb(data);
 		else
 			r_ab(data, 'a');
 	}

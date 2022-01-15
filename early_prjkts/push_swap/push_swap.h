@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/15 17:18:36 by pskip             #+#    #+#             */
+/*   Updated: 2022/01/15 22:34:20 by pskip            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include <stdlib.h>
 # include <unistd.h>
-#include <stdio.h>
-
 
 typedef struct s_stack
 {
@@ -43,12 +53,8 @@ int		ft_atoi(char *str);
 void	cleaner(char **cleanit, int ind);
 int		*numcpy(int *sors, int len);
 t_stack	*ft_lstnew(int content);
-
-void	printer(int *mass, int len);
-void	list_printer(t_stack *a);
-
 int		*ft_strjoin(int *s1, int *s2, int s1len, int s2len);
-int		find_ind(int num,int *sorted);
+int		find_ind(int num, int *sorted);
 void	init_stack(int *mass, int *sorted, t_meta *data);
 void	algo_start(t_meta *data);
 int		check_if_elem_in_subcombo(int *subcombo, t_meta *data);
@@ -56,15 +62,18 @@ void	algo_continue(t_meta *data);
 t_stack	*algo_base(t_meta *data);
 void	ground_zero(t_stack *on_count);
 void	read_best_sum(t_stack *elem);
+int		norma_adapt(t_stack *elem, t_stack *a);
 
-void	sa(t_meta *data);
-void	sb(t_meta *data);
+void	sa(t_meta *data, int check);
+void	sb(t_meta *data, int check);
 void	ss(t_meta *data);
 void	pb(t_meta *data);
 void	pa(t_meta *data);
 void	r_ab(t_meta *data, char stack);
 void	rr(t_meta *data);
 void	rr_ab(t_meta *data, char stack);
-void 	rrr(t_meta *data);
+void	rrr(t_meta *data);
 
-# endif
+void	clean_all(t_meta *data);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 21:38:03 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/13 21:48:30 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/15 22:33:09 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	push_swap(int ac, char **av)
 	init_stack(mass, sort_mass, data);
 	free(sort_mass);
 	free(mass);
+	data->a_size = data->len;
 	algo_start(data);
 	return (1);
 }
