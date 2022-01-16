@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:34:49 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/15 22:34:50 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/16 13:08:08 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,13 @@ void	algo_start(t_meta *data)
 	int		*a_save;
 	t_stack	*break_point;
 
-	a_save = find_best(data);
 	data->b_size = 0;
+	if (data->a_size <= 5)
+	{
+		algo3_5(data);
+		return ;
+	}
+	a_save = find_best(data);
 	while (!check_if_elem_in_subcombo(a_save, data))
 		pb_rb(data);
 	break_point = data->a;

@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 17:18:36 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/15 22:34:20 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/16 12:32:09 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	**ft_split(char const *s, char c);
 int		ft_atoi(char *str);
 void	cleaner(char **cleanit, int ind);
 int		*numcpy(int *sors, int len);
+void	algo3_5(t_meta *data);
 t_stack	*ft_lstnew(int content);
 int		*ft_strjoin(int *s1, int *s2, int s1len, int s2len);
 int		find_ind(int num, int *sorted);
