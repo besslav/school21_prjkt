@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algoritm.c                                         :+:      :+:    :+:   */
+/*   algoritm_best_combo.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:34:49 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/16 13:08:08 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/21 17:33:41 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	pb_rb(t_meta *data)
 {
-	pb(data);
+	pb(data, 1);
 	if (data->b->real_ind < (data->a_size + data->b_size) / 2)
-		r_ab(data, 'b');
+		r_ab(data, 'b', 1);
 }
 
 static void	check_first(t_stack *start, int *best)
@@ -91,13 +91,13 @@ void	algo_start(t_meta *data)
 	while (!check_if_elem_in_subcombo(a_save, data))
 		pb_rb(data);
 	break_point = data->a;
-	r_ab(data, 'a');
+	r_ab(data, 'a', 1);
 	while (data->a != break_point)
 	{
 		if (!check_if_elem_in_subcombo(a_save, data))
 			pb_rb(data);
 		else
-			r_ab(data, 'a');
+			r_ab(data, 'a', 1);
 	}
 	free(a_save);
 	algo_continue(data);

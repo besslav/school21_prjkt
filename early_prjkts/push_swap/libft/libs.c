@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 21:19:15 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/11 18:01:23 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/20 19:47:15 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_atoi(char *str)
 	return ((int)ans * sign);
 }
 
-int	*ft_strjoin(int *s1, int *s2, int s1len, int s2len)
+int	*ft_intjoin(int *s1, int *s2, int s1len, int s2len)
 {
 	int	*news;
 	int	ind;

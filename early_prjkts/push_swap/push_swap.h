@@ -6,14 +6,16 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 17:18:36 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/16 12:32:09 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/21 17:37:12 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# define BUFFER_SIZE 4
 # include <stdlib.h>
 # include <unistd.h>
+#include <fcntl.h>
 
 typedef struct s_stack
 {
@@ -42,6 +44,8 @@ typedef struct s_meta
 	int		b_size;	
 }	t_meta;
 
+int		*init_mass(int ac, char **av, t_meta *data, int len);
+
 int		isnum(char *num);
 void	check_doubles(int *mass, int len);
 void	sorted(int *mass, int len);
@@ -54,7 +58,7 @@ void	cleaner(char **cleanit, int ind);
 int		*numcpy(int *sors, int len);
 void	algo3_5(t_meta *data);
 t_stack	*ft_lstnew(int content);
-int		*ft_strjoin(int *s1, int *s2, int s1len, int s2len);
+int		*ft_intjoin(int *s1, int *s2, int s1len, int s2len);
 int		find_ind(int num, int *sorted);
 void	init_stack(int *mass, int *sorted, t_meta *data);
 void	algo_start(t_meta *data);
@@ -65,15 +69,20 @@ void	ground_zero(t_stack *on_count);
 void	read_best_sum(t_stack *elem);
 int		norma_adapt(t_stack *elem, t_stack *a);
 
+char	*get_next_line(int fd);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_substr_gnl(char const *s, int start, int len);
+char	*ft_strchr(char *str, int findit);
+
 void	sa(t_meta *data, int check);
 void	sb(t_meta *data, int check);
-void	ss(t_meta *data);
-void	pb(t_meta *data);
-void	pa(t_meta *data);
-void	r_ab(t_meta *data, char stack);
-void	rr(t_meta *data);
-void	rr_ab(t_meta *data, char stack);
-void	rrr(t_meta *data);
+void	ss(t_meta *data, int should_write);
+void	pb(t_meta *data, int should_write);
+void	pa(t_meta *data, int should_write);
+void	r_ab(t_meta *data, char stack, int should_write);
+void	rr(t_meta *data, int should_write);
+void	rr_ab(t_meta *data, char stack, int should_write);
+void	rrr(t_meta *data, int should_write);
 
 void	clean_all(t_meta *data);
 

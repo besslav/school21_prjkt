@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:49:53 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/10 21:20:41 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/20 20:05:26 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static char	*ft_substr(char const *s, int start, int len)
 		save[0] = '\0';
 		return (save);
 	}
-	save = (char *)malloc(len + 1);
+	save = (char *)malloc((len + 1) * sizeof(char));
 	if (save)
 	{
 		while (ind < len)

@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 21:17:09 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/15 19:59:06 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/21 17:32:17 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ void	sb(t_meta *data, int check)
 	}
 }
 
-void	ss(t_meta *data)
+void	ss(t_meta *data, int should_write)
 {
 	sa(data, 0);
 	sb(data, 0);
-	write(1, "ss\n", 3);
+	if (should_write)
+		write(1, "ss\n", 3);
 }

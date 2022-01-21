@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 21:18:28 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/15 22:26:03 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/21 17:30:05 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_stack	*add_one(t_stack *stack, t_stack *save)
 	return (stack);
 }
 
-void	pa(t_meta *data)
+void	pa(t_meta *data, int should_write)
 {
 	t_stack	*save;
 
@@ -51,11 +51,12 @@ void	pa(t_meta *data)
 			data->a->real_ind = save->real_ind;
 		}
 		data->a_size++;
-		write(1, "pa\n", 3);
+		if (should_write)
+			write(1, "pa\n", 3);
 	}
 }
 
-void	pb(t_meta *data)
+void	pb(t_meta *data, int should_write)
 {
 	t_stack	*save;
 
@@ -78,6 +79,7 @@ void	pb(t_meta *data)
 			data->b->real_ind = save->real_ind;
 		}
 		data->b_size++;
-		write(1, "pb\n", 3);
+		if (should_write)
+			write(1, "pb\n", 3);
 	}
 }

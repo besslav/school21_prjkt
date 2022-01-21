@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 21:21:04 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/10 22:26:06 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/20 21:10:12 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	isnum(char *num)
 	{
 		if (num[i] < '0' || num[i] > '9')
 			if (!(i == 0 && (num[i] == '-' || num[i] == '+')))
-				exit(0);
+			{
+				write(1, "not num\n", 8);
+				exit(1);
+			}
 	}
 	return (1);
 }
@@ -29,14 +32,19 @@ int	isnum(char *num)
 void	check_doubles(int *mass, int len)
 {
 	int	i;
+	int	prev;
 
 	i = 0;
-	while (++i < len - 1)
+	while (++i < len)
 	{
-		if (mass[i] == mass[i - 1] || mass[i] == mass[i + 1])
+		prev = i;
+		while (--prev >= 0)
 		{
-			write(2, "doubles detected\n", 17);
-			exit(0);
+			if (mass[i] == mass[prev])
+			{
+				write(2, "doubles detected\n", 17);
+				exit(1);		
+			}
 		}
 	}
 }
@@ -55,5 +63,5 @@ void	sorted(int *mass, int len)
 		if (mass[ind] > mass[ind + 1])
 			return ;
 	write(1, "already sorted\n", 15);
-	exit(0);
+	exit(1);
 }
