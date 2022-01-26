@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 18:21:43 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/25 16:45:10 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/26 19:27:35 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,3 @@ void	execute(char *command, char **env)
 	}
 	errors("cant find command");
 }
-

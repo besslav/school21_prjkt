@@ -6,11 +6,22 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:43:52 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/25 15:55:29 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/26 20:38:14 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+int	ft_strlen(const char *string)
+// len of string
+{
+	int	lenstring;
+
+	lenstring = 0;
+	while (string[lenstring] != '\0')
+		lenstring++;
+	return (lenstring);
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -68,35 +79,43 @@ char	*ft_substr(char const *s, int start, int len)
 	return (save);
 }
 
-int	ft_strncmp(const char *first, const char *second, int end)
+int	ft_strncmp(char *first, char *second, int end)
 /* finf first diff between two str and return ascii diff,
 	 no more then (end) checks*/
 {
-	int				ind;
-	unsigned char	*fir;
-	unsigned char	*sec;
+	int	ind;
 
 	ind = 0;
-	fir = (unsigned char *) first;
-	sec = (unsigned char *) second;
 	if (end == 0)
 		return (0);
-	while (ind < end && (first[ind] || second[ind]))
+	while (second[ind] && ind < end)
 	{
 		if (first[ind] != second[ind])
-			return (fir[ind] - sec[ind]);
+			return (first[ind] - second[ind]);
 		ind++;
 	}
-	return (0);
+	if (first[ind] && first[ind] == '\n')
+		return (0);
+	else
+		return (first[ind]);
 }
 
-int	ft_strlen(const char *string)
-// len of string
+char	*ft_strchr(char *str, int findit)
+//finding first (findit) in (str)
 {
-	size_t	lenstring;
+	int	ind;
 
-	lenstring = 0;
-	while (string[lenstring] != '\0')
-		lenstring++;
-	return (lenstring);
+	ind = 0;
+	findit = (char)findit;
+	if (!str)
+		return (0);
+	while (str[ind])
+	{
+		if (str[ind] == findit)
+			return ((char *)&str[ind]);
+		ind++;
+	}
+	if (findit == '\0')
+		return ((char *)&str[ind]);
+	return (0);
 }

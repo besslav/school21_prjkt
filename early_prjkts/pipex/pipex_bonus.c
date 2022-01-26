@@ -6,18 +6,18 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:46:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/26 15:02:21 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/26 21:57:18 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	child_process(int i, char **av, char **env)
+static void	child_process(char *av, char **env)
 {
 	int		fd[2];
 	pid_t	pid;
 
-	if(pipe(fd) == -1)
+	if (pipe(fd) == -1)
 		errors("can`t create channel");
 	pid = fork();
 	if (pid == -1)
@@ -26,7 +26,7 @@ void	child_process(int i, char **av, char **env)
 	{
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
-		execute(av[i], env);
+		execute(av, env);
 	}
 	else
 	{
@@ -36,31 +36,80 @@ void	child_process(int i, char **av, char **env)
 	}
 }
 
-void	parent_process(int ac, char **av, char **env)
+static void	here_doc_child(int *fd, char *limiter)
 {
-	int file_fd;
+	char	*line;
 
-	file_fd = open(av[ac - 1], O_WRONLY | O_CREAT, 00777);
-	if (file_fd == -1)
+	close(fd[0]);
+	while (get_next_line(&line))
+	{
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+			exit(EXIT_SUCCESS);
+		write(fd[1], line, ft_strlen(line));
+	}
+	exit(EXIT_SUCCESS);
+}
+
+static void	here_doc(int ac, char *limiter)
+{
+	int		fd[2];
+	pid_t	pid;
+
+	if (ac < 6)
+		errors("bad input for here_doc");
+	if (pipe(fd) == -1)
+		errors("can`t create channel");
+	pid = fork();
+	if (pid == -1)
+		errors("cant clone process");
+	if (!pid)
+		here_doc_child(fd, limiter);
+	else
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		waitpid(pid, NULL, 0);
+	}
+}
+
+static int	opener(char *file_name, int way)
+{
+	int	fd;
+
+	if (way == 0)
+		fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0777);
+	else if (way == 1)
+		fd = open(file_name, O_RDONLY);
+	else
+		fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (fd == -1)
 		errors("cant open file");
-	dup2(file_fd, STDOUT_FILENO);
-	execute(av[3], env);
-	//close(file_fd);
+	return (fd);
 }
 
 int	main(int ac, char **av, char **env)
 {
 	int		i;
-	int file_fd;
+	int		file_in;
+	int		file_out;
 
 	if (ac < 5)
 		errors("wrong input");
 	i = 2;
-	file_fd = open(av[1], O_RDONLY);
-	if (file_fd == -1)
-		errors("cant open file");
-	dup2(file_fd, STDIN_FILENO);
+	if (!(ft_strncmp("here_doc", av[1], 8)))
+	{
+		file_out = opener(av[ac - 1], 0);
+		here_doc(ac, av[2]);
+		i++;
+	}
+	else
+	{
+		file_in = opener(av[1], 1);
+		file_out = opener(av[ac - 1], 2);
+		dup2(file_in, STDIN_FILENO);
+	}
 	while (i < ac - 2)
-		child_process(i++, av, env);
-	parent_process(ac, av, env);
+		child_process(av[i++], env);
+	dup2(file_out, STDOUT_FILENO);
+	execute(av[i], env);
 }

@@ -1,13 +1,13 @@
 NAME = pipex
-NAME_B = next_lvl_pipex
+NAME_B = pipex_bonus
 CC = gcc
 HEAD	= pipex.h
 GFLAGS =  -Wall -Wextra -Werror 
 SRCS = 	pipex.c utils.c\
-		liba/ft_libs.c liba/ft_split.c
+		includes/ft_libs.c includes/ft_split.c includes/get_next_line.c
 		
-SRCS_B = pipex_bonus.c utils_bonus.c\
-		liba/ft_libs.c liba/ft_split.c 
+SRCS_B = pipex_bonus.c utils.c\
+		includes/ft_libs.c includes/ft_split.c includes/get_next_line.c
 
 
 
@@ -20,13 +20,13 @@ OBJ_B = ${SRCS_B:%.c=%.o}
 all: ${NAME}
 
 ${NAME}: ${OBJ} ${HEAD}
-	@${CC} $(GFLAGS) ${OBJ} -o $(NAME)
+	${CC} $(GFLAGS) ${OBJ} -o $(NAME)
 
 ${NAME_B}: ${OBJ_B} ${HEAD}
-	@${CC} $(GFLAGS) ${OBJ_B} -o $(NAME_B)
+	${CC} $(GFLAGS) ${OBJ_B} -o $(NAME_B)
 
 %.o	: %.c
-	@${CC} ${GFLAGS}  -c $< -o $@
+	${CC} ${GFLAGS}  -c $< -o $@
 
 bonus	: ${NAME_B} 
 
