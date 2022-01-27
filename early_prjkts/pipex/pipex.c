@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/24 17:59:03 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/26 22:41:32 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/27 17:02:54 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static void	child_process(int *fd, char **av, char **env)
 {
-	int	file_in;
+	int		file_in;
 
 	file_in = open(av[1], O_RDONLY);
 	if (file_in == -1)
-		errors("cant open file");
+		errors("cant open in_file");
 	close(fd[0]);
 	dup2(fd[1], STDOUT_FILENO);
 	dup2(file_in, STDIN_FILENO);

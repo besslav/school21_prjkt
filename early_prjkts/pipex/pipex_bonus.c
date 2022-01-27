@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/25 17:46:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/26 21:57:18 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/27 17:03:58 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static void	child_process(char *av, char **env)
 		execute(av, env);
 	}
 	else
-	{
+	{	
+		waitpid(pid, NULL, 0);
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
-		waitpid(pid, NULL, 0);
 	}
 }
 
@@ -66,25 +66,10 @@ static void	here_doc(int ac, char *limiter)
 		here_doc_child(fd, limiter);
 	else
 	{
+		waitpid(pid, NULL, 0);
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
-		waitpid(pid, NULL, 0);
 	}
-}
-
-static int	opener(char *file_name, int way)
-{
-	int	fd;
-
-	if (way == 0)
-		fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0777);
-	else if (way == 1)
-		fd = open(file_name, O_RDONLY);
-	else
-		fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (fd == -1)
-		errors("cant open file");
-	return (fd);
 }
 
 int	main(int ac, char **av, char **env)

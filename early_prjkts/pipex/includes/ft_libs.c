@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 18:43:52 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/26 20:38:14 by pskip            ###   ########.fr       */
+/*   Updated: 2022/01/27 16:34:32 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_strlen(const char *string)
 	return (lenstring);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		s1len;
 	int		s2len;
@@ -47,6 +47,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (++ind < s2len)
 		news[s1len + ind] = s2[ind];
 	news[s1len + ind] = '\0';
+	free(s1);
 	return (news);
 }
 
