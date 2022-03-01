@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 17:53:11 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/21 17:34:28 by pskip            ###   ########.fr       */
+/*   Updated: 2022/03/01 18:36:38 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	rotater(t_meta *data, t_stack *push_it)
 
 void	algo_continue(t_meta *data)
 {
+	// возвращение элементов из стека b в a 
 	t_stack	*push_it;
 
 	while (data->b)
