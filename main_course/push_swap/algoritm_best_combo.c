@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:34:49 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/21 17:33:41 by pskip            ###   ########.fr       */
+/*   Updated: 2022/03/01 18:18:40 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static int	*find_best(t_meta *data)
 
 void	algo_start(t_meta *data)
 {
+	// поиск наибольшей отсортированной подпоследовательности
 	int		*a_save;
 	t_stack	*break_point;
 
@@ -88,6 +89,8 @@ void	algo_start(t_meta *data)
 		return ;
 	}
 	a_save = find_best(data);
+	// переброска из а в b всех элементов не входящих
+	// в наибольшую отсортированную подпоследовательность
 	while (!check_if_elem_in_subcombo(a_save, data))
 		pb_rb(data);
 	break_point = data->a;

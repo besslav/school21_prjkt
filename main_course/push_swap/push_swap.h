@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 17:18:36 by pskip             #+#    #+#             */
-/*   Updated: 2022/01/21 17:37:12 by pskip            ###   ########.fr       */
+/*   Updated: 2022/03/01 17:50:55 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,13 @@ t_stack	*algo_base(t_meta *data);
 void	ground_zero(t_stack *on_count);
 void	read_best_sum(t_stack *elem);
 int		norma_adapt(t_stack *elem, t_stack *a);
-
+// вспомогательные функции для checker
+// (проверяет работоcпособность всего проекта)
 char	*get_next_line(int fd);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_substr_gnl(char const *s, int start, int len);
 char	*ft_strchr(char *str, int findit);
-
+// функции для работы со стеками
 void	sa(t_meta *data, int check);
 void	sb(t_meta *data, int check);
 void	ss(t_meta *data, int should_write);
