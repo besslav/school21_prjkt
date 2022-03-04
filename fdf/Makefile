@@ -1,13 +1,10 @@
 NAME = fdf
-NAME_B = checker
 CC = gcc
 HEAD	= fdf.h
 GFLAGS =  -Wall -Wextra -Werror 
-SRCS = 	fdf.c \
+SRCS = 	fdf.c  drower.c events.c errors.c colors.c\
 		includes/liba.c includes/get_next_line.c includes/get_next_line_utils.c\
 		includes/ft_split.c
-		
-SRCS_B =  includes/liba.c includes/get_next_line.c includes/get_next_line_utils.c
 
 
 
@@ -20,20 +17,16 @@ OBJ_B = ${SRCS_B:%.c=%.o}
 all: ${NAME}
 
 ${NAME}: ${OBJ} ${HEAD}
-	@${CC} $(GFLAGS) ${OBJ} -o $(NAME)
-
-${NAME_B}: ${OBJ_B} ${HEAD}
-	@${CC} $(GFLAGS) ${OBJ_B} -o $(NAME_B)
+	@${CC} ${OBJ} -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o	: %.c
-	@${CC} ${GFLAGS}  -c $< -o $@
+	@${CC} -I mlx -c $< -o $@
 
-bonus	: ${NAME_B} 
 
 clean:
-	@rm -f ${OBJ} ${OBJ_B}
+	@rm -f ${OBJ} 
 
 fclean: clean
-	@rm -f ${NAME} ${NAME_B}
+	@rm -f ${NAME} 
 
 re: fclean all 

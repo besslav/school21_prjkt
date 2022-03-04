@@ -29,6 +29,15 @@ void	cleaner(char **cleanit, int ind)
 	free(cleanit);
 }
 
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char *ptr;
+
+	ptr = (unsigned char *)s;
+	while (n--)
+		*ptr++ = '\0';
+}
+
 int	ft_atoi(char *str)
 {
 	int				i;
