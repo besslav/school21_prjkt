@@ -6,24 +6,22 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 18:30:08 by pskip             #+#    #+#             */
-/*   Updated: 2022/03/04 21:05:00 by pskip            ###   ########.fr       */
+/*   Updated: 2022/03/10 03:50:27 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 void	scaler(t_meta *data, int key)
 {
 	if (key == 69)
 	{
-		if (data->scale > 35)
+		if (data->scale > 35 && data->scale < 150)
 		{
 			data->scale += (35 / data->scale);
 		}
-		else
+		else if (data->scale < 35)
 			data->scale += 3;
-		data->z_scale = data->z_scale + data->scale / 5;
 	}
 	if (key == 78)
 	{
@@ -31,29 +29,47 @@ void	scaler(t_meta *data, int key)
 			data->scale -= 3;
 		else
 			data->scale = 1;
-		data->z_scale = data->z_scale - data->scale / 5;
 	}	
 }
 
-int	deal_key(int key, t_meta *data)
+static void	rotator(int key, t_meta *data)
 {
-	printf("%d\n", key);
+	if (key == 84)
+		data->alfa += 0.05;
+	if (key == 91)
+		data->alfa -= 0.05;
+	if (key == 86)
+		data->beta += 0.05;
+	if (key == 88)
+		data->beta -= 0.05;
+	if (key == 83)
+		data->gamma += 0.05;
+	if (key == 85)
+		data->gamma -= 0.05;
+}
+
+int	key_hook(int key, t_meta *data)
+{
 	if (key == 126)
-		data->shift_y -= 30;
+		data->shift_y -= 10;
 	if (key == 125)
-		data->shift_y += 30;
+		data->shift_y += 10;
 	if (key == 123)
-		data->shift_x -= 30;
+		data->shift_x -= 10;
 	if (key == 124)
-		data->shift_x += 30;
+		data->shift_x += 10;
 	if (key == 69 || key == 78)
 		scaler(data, key);
-	if (key == 84)
-		data->z_scale -= 3;
-	if (key == 91)
-		data->z_scale += 3;
-	//if (key >= 83 && != 90 key <= 92)
-	//	rotator(key, data); 
+	if (key == 81 && data->z_scale > -50)
+		data->z_scale -= 1;
+	if (key == 75 && data->z_scale < 50)
+		data->z_scale += 1;
+	if (key == 34)
+		data->projection = 'i';
+	if (key == 35)
+		data->projection = 'p';
+	if ((key >= 83 && key <= 92) && key != 90)
+		rotator(key, data);
 	if (key == 53)
 		exit(0);
 	drow_map(data);

@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:07:02 by pskip             #+#    #+#             */
-/*   Updated: 2022/03/01 20:37:24 by pskip            ###   ########.fr       */
+/*   Updated: 2022/03/07 19:52:08 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	*ft_strjoin(char *s1, char *s2)
 char	*ft_substr_gnl(char const *s, int start, int len)
 {
 	char	*save;
-	int	ind;
+	int		ind;
 
 	ind = 0;
 	if (ft_strlen(s) - start < len)

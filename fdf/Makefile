@@ -2,9 +2,9 @@ NAME = fdf
 CC = gcc
 HEAD	= fdf.h
 GFLAGS =  -Wall -Wextra -Werror 
-SRCS = 	fdf.c  drower.c events.c errors.c colors.c\
+SRCS = 	fdf.c  drower.c events.c errors.c colors.c rebuilder.c\
 		includes/liba.c includes/get_next_line.c includes/get_next_line_utils.c\
-		includes/ft_split.c
+		includes/ft_split.c includes/get_color.c
 
 
 
@@ -17,10 +17,10 @@ OBJ_B = ${SRCS_B:%.c=%.o}
 all: ${NAME}
 
 ${NAME}: ${OBJ} ${HEAD}
-	@${CC} ${OBJ} -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	@${CC} ${GFLAGS} ${OBJ} -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
-%.o	: %.c
-	@${CC} -I mlx -c $< -o $@
+%.o	: %.c ${HEAD}
+	@${CC} ${GFLAGS} -I mlx -c $< -o $@
 
 
 clean:

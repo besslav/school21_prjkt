@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:43:52 by pskip             #+#    #+#             */
-/*   Updated: 2022/03/04 20:53:53 by pskip            ###   ########.fr       */
+/*   Updated: 2022/03/10 04:11:24 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,16 @@ static void	new_line_creator(char **pre_mass, t_element *step_mass,
 	while (pre_mass[++j])
 	{
 		step_mass[j].z = ft_atoi(pre_mass[j]);
+		step_mass[j].color = get_color(pre_mass[j]);
+		if (line == 0 && j == 0)
+		{
+			data->max = step_mass[j].z;
+			data->min = step_mass[j].z;
+		}
+		if (data->max < step_mass[j].z)
+			data->max = step_mass[j].z;
+		if (data->min > step_mass[j].z)
+			data->min = step_mass[j].z;
 	}
 }
 
@@ -53,10 +63,9 @@ static void	map_creator(int fd, t_meta *data)
 	close(fd);
 }
 
-static void	is_map_valid(char *map_name, t_meta *data)
+static void	count_rows(char *map_name, t_meta *data)
 {
 	char	*str;
-	int		i;
 	int		fd;
 
 	fd = open(map_name, O_RDONLY);
@@ -68,13 +77,6 @@ static void	is_map_valid(char *map_name, t_meta *data)
 	while (str)
 	{
 		data->row++;
-		i = -1;
-		while (str[++i] && str[i] != '\n')
-		{
-			if (str[i] != ' ' && str[i] != '+' && str[i] != '-'
-				&& (str[i] < '0' || str[i] > '9'))
-				exit (1);
-		}
 		free(str);
 		str = gnl(fd);
 	}
@@ -88,17 +90,18 @@ static void	set_basic_value(t_meta *data)
 	data->scale = 20;
 	data->shift_x = 450;
 	data->shift_y = 200;
-	data->z_scale = data->scale / 5;
+	data->z_scale = 1;
 	data->angle = 0.523599;
-	data->color = 0xff00;
-	data->min = 0;
-	data->max = 0;
+	data->alfa = 0;
+	data->beta = 0;
+	data->gamma = 0;
+	data->projection = 'i';
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
 		errors("mlx_init_error\n", 15);
 	data->win_ptr = mlx_new_window(data->mlx_ptr, HEIGHT, WIDTH, "FDF");
 	data->img_ptr = mlx_new_image(data->mlx_ptr, HEIGHT, WIDTH);
-	if (!(data->mlx_ptr || data->img_ptr))
+	if (!(data->mlx_ptr && data->img_ptr))
 		errors("mlx_win_or_img_error\n", 21);
 	data->addr = mlx_get_data_addr
 		(data->img_ptr, &data->bits_per_pixel,
@@ -118,7 +121,7 @@ int	main(int ac, char **av)
 	if (!data)
 		errors("malloc error\n", 13);
 	set_basic_value(data);
-	is_map_valid(av[1], data);
+	count_rows(av[1], data);
 	data->array = (t_element **)malloc(data->row * sizeof(t_element *));
 	if (!data->array)
 		errors("malloc error\n", 13);
@@ -126,8 +129,12 @@ int	main(int ac, char **av)
 	if (fd == -1)
 		errors("cant open\n", 10);
 	map_creator(fd, data);
+	if (data->row * data->col > 1000)
+		data->scale = 5;
+	if (data->row * data->col > 10000)
+		data->scale = 1;
 	drow_map(data);
-	mlx_key_hook(data->win_ptr, deal_key, data);
+	mlx_hook(data->win_ptr, 2, 0, key_hook, data);
 	mlx_hook(data->win_ptr, 17, 0, event_hook, data);
 	mlx_loop(data->mlx_ptr);
 }

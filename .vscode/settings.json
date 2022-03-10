@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"push_swap.h": "c",
-		"gnl.h": "c"
+		"gnl.h": "c",
+		"mlx.h": "c"
 	}
 }
