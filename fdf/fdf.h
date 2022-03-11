@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 19:46:16 by pskip             #+#    #+#             */
-/*   Updated: 2022/03/10 05:23:42 by pskip            ###   ########.fr       */
+/*   Updated: 2022/03/11 03:51:21 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,26 @@ typedef struct s_meta
 }	t_meta;
 
 // main func
-void	drow_line(t_meta *data, t_element o1, t_element o2);
-void	drow_map(t_meta *data);
-int		event_hook(void);
-int		key_hook(int key, t_meta *data);
-void	errors(char *error, int err_len);
-void	choice_of_color(t_meta *data, float z, int col_max, int col_min);
-void	rebuild_array(t_meta *data);
-int		get_color(char *elem);
+void		drow_line(t_meta *data, t_element o1, t_element o2);
+void		drow_map(t_meta *data);
+int			event_hook(void);
+int			key_hook(int key, t_meta *data);
+void		errors(char *error, int err_len);
+void		choice_of_color(t_meta *data, float z, int col_max, int col_min);
+void		rebuild_array(t_meta *data);
+int			get_color(char *elem);
 unsigned int	get_a_color_gap(int start, int end, unsigned char slider);
 
 // additional func
-char	*gnl(int fd);
-void	cleaner(char **cleanit, int ind);
-int		ft_numslen(char **string);
-int		ft_strlen(const char *string);
-int		ft_atoi(char *str);
-void	ft_bzero(void *s, size_t n);
-char	**ft_split(char const *s, char c);
-char	*ft_strchr(char *str, int findit);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_substr_gnl(char const *s, int start, int len);
+char		*gnl(int fd);
+void		cleaner(char **cleanit, int ind);
+int			ft_numslen(char **string);
+int			ft_strlen(const char *string);
+int			ft_atoi(char *str);
+void		ft_bzero(void *s, size_t n);
+char		**ft_split(char const *s, char c);
+char		*ft_strchr(char *str, int findit);
+char		*ft_strjoin(char *s1, char *s2);
+char		*ft_substr_gnl(char const *s, int start, int len);
 
 #endif

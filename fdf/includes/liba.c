@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 19:51:39 by pskip             #+#    #+#             */
-/*   Updated: 2022/03/07 19:51:40 by pskip            ###   ########.fr       */
+/*   Updated: 2022/03/11 03:54:44 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	ft_numslen(char **string)
 	lenstring = 0;
 	while (string[lenstring])
 		lenstring++;
+	if (lenstring == 0)
+		errors ("empty_line\n", 11);
 	return (lenstring);
 }
 

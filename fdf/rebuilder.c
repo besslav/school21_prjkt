@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 19:59:31 by pskip             #+#    #+#             */
-/*   Updated: 2022/03/07 20:17:36 by pskip            ###   ########.fr       */
+/*   Updated: 2022/03/11 03:50:58 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	new_point(t_meta *data, int x, int y, float *pre_data)
 	if (data->projection == 'i')
 	{
 		data->array[y][x].x
-			= (pre_data[0] - pre_data[1] * cos(data->angle)) + data->shift_x;
+			= (pre_data[0] - pre_data[1]) * cos(data->angle) + data->shift_x;
 		data->array[y][x].y = (((pre_data[0] + pre_data[1]) * sin(data->angle))
 				- (data->array[y][x].z * data->z_scale))
 			+ data->shift_y;
