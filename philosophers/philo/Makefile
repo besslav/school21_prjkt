@@ -17,7 +17,7 @@ all: ${NAME}
 ${NAME}: ${OBJ} ${HEAD}
 	@${CC} $(GFLAGS) ${OBJ} -o $(NAME)
 
-%.o	: %.c
+%.o	: %.c ${HEAD}
 	@${CC} ${GFLAGS}  -c $< -o $@
 
 

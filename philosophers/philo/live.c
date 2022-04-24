@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/22 12:49:41 by pskip             #+#    #+#             */
-/*   Updated: 2022/03/22 12:49:59 by pskip            ###   ########.fr       */
+/*   Updated: 2022/03/23 15:11:00 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	*living(void *phil_void)
 	phil->last_eat_time = real_time();
 	if (!(phil->place % 2))
 		sleeper(phil, (phil->meta->eat_time / 3));
-	if (!(phil->place))
+	if (!(phil->place) && (phil->meta->num_philos % 2))
 		sleeper(phil, (phil->meta->eat_time / 3 * 2));
 	while (((phil->meta->num_of_eat == -1)
 			|| (phil->ate_time < phil->meta->num_of_eat))

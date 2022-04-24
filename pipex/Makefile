@@ -25,7 +25,7 @@ ${NAME}: ${OBJ} ${HEAD}
 ${NAME_B}: ${OBJ_B} ${HEAD}
 	${CC} $(GFLAGS) ${OBJ_B} -o $(NAME_B)
 
-%.o	: %.c
+%.o	: %.c ${HEAD}
 	${CC} ${GFLAGS}  -c $< -o $@
 
 bonus	: ${NAME_B} 
