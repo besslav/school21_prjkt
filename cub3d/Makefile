@@ -16,7 +16,7 @@ OBJ_B = ${SRCS_B:%.c=%.o}
 all: ft gnl mlx ${NAME}
 
 ${NAME}: ${OBJ} ${HEAD}
-	@${CC}  ${OBJ} -L./libft -lft -L./get_next_line -lget_next_line -L./mlx -framework OpenGL -framework AppKit -o $(NAME)
+	@${CC}  ${OBJ} -L./libft -lft -L./get_next_line -lget_next_line -L./mlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o	: %.c ${HEAD}
 	@${CC}  -I mlx -c $< -o $@

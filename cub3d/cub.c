@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:22 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/06 21:24:11 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/07 19:50:50 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void map_open(char *file_name, t_global *global)
 int main(int ac, char **av)
 {
 	t_global	*global;
-	//t_mlx_data		*data;
+	t_mlx_data		*data;
 
 	if (ac != 2)
 		error("bad argv\n");
@@ -50,21 +50,21 @@ int main(int ac, char **av)
 
 
 
-	// data = (t_data *) malloc(sizeof(t_data));
-	// if (!data)
-	// 	error("malloc error\n");
-	// data->mlx = mlx_init();
-	// if (!data->mlx)
-	// 	error("mlx_init_error\n");
-	// data->win = mlx_new_window(data->mlx, HEIGHT, WIDTH, "CUB");
-	// data->img = mlx_new_image(data->mlx, HEIGHT, WIDTH);
-	// if (!(data->mlx && data->img))
-	// 	error("mlx_win_or_img_error\n");
-	// data->addr = mlx_get_data_addr
-	// 	(data->img, &data->bits_per_pixel,
-	// 		&data->line_length, &data->endian);
-	// if (!data->addr)
-	// 	error("addr_err\n");
+	data = (t_mlx_data *) malloc(sizeof(t_mlx_data));
+	if (!data)
+		error("malloc error\n");
+	data->mlx = mlx_init();
+	if (!data->mlx)
+		error("mlx_init_error\n");
+	data->win = mlx_new_window(data->mlx, HEIGHT, WIDTH, "CUB");
+	data->img = mlx_new_image(data->mlx, HEIGHT, WIDTH);
+	if (!(data->mlx && data->img))
+		error("mlx_win_or_img_error\n");
+	data->addr = mlx_get_data_addr
+		(data->img, &data->bits_per_pixel,
+			&data->line_length, &data->endian);
+	if (!data->addr)
+		error("addr_err\n");
 
 	
 	//drow_image(data, global);

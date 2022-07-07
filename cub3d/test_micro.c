@@ -53,13 +53,11 @@ void exe_shell(t_list *list, char **env) {
 			fatal();
 		if (list->prev_type == 1 && (dup2(list->prev_pipe, 0) < 0))
 			fatal();
-		if (execve(list->av[0], list->av, env) < 0) {
-			write(2, "error: cannot execute ", 22);
-			write(2, list->av[0], ft_strlen(list->av[0]));
-			write(2, "\n", 1);
-			exit(1);
-		}
-		//exit(0); Если не примет, то добавить
+		if (execve(list->av[0], list->av, env) < 0) 
+		write(2, "error: cannot execute ", 22);
+		write(2, list->av[0], ft_strlen(list->av[0]));
+		write(2, "\n", 1);
+		exit(1);
 	} else {
 		waitpid(pid, NULL, 0);
 		if (list->type == 1 || list->prev_type == 1) {
