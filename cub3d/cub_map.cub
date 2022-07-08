@@ -2,7 +2,7 @@
 EA ./images/all_walls.png
 SO    ./images/all_walls.png   
 WE ./images/all_walls.png
-F 220,100,0
+F 0,255,0
 C 225,30,0
        01111111111111111111111111111
        1000000000110000000000001

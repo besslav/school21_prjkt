@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ways_colors.c                                      :+:      :+:    :+:   */
+/*   map_ways_colors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:52:53 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/06 16:38:40 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/08 15:53:42 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,21 @@ char	*mall_zone(char *zone, char *for_save)
 {
 	int	i;
 
-	i = -1;
 	if (zone)
 		error("more_then_one_way_to_same_side_of_the_wall\n");
 	zone = (char *) malloc(sizeof(char) * ft_strlen(for_save));
 	if (!zone)
 		error("malloc_dir_or_collor\n");
-	while(for_save[++i])
+	i = 0;
+	while(for_save[i] && for_save[i] != '\n')
+	{
 		zone[i] = for_save[i];
+		i++;
+	}
 	return (zone);
 }
 
-void	svitch_type(char **s_row, t_global *global)
+void	switch_type(char **s_row, t_global *global)
 {
 	if (!ft_strncmp(s_row[0], "NO", 3))
 		global->north = mall_zone(global->north, s_row[1]);
@@ -89,7 +92,7 @@ char	*add_info(int fd, t_global *global)
 		}
 		global->line_start++;
 		if (splitted_row[0][0] != '\n')
-			svitch_type(splitted_row, global);
+			switch_type(splitted_row, global);
 		cleaner(splitted_row);
 		free(row);
 		row = get_next_line(fd);

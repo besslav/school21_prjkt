@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:22 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/07 19:50:50 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/08 20:21:42 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,55 @@ void map_open(char *file_name, t_global *global)
 	free(global->map_data->walid_visited);
 }
 
+void	game_data_collect(t_game_data *game, t_global *info)
+{
+	if (info->map_data->dir = 'W')
+		game->alpa_player = M_PI;
+	else if (info->map_data->dir = 'E')
+		game->alpa_player = 0;
+	else if (info->map_data->dir = 'N')
+		game->alpa_player = M_PI_2;
+	else if (info->map_data->dir = 'S')
+		game->alpa_player = 3 * M_PI_2;
+	game->x_player = (float)(info->map_data->start % info->map_data->x_len) + 0.5;
+	game->y_player = (float)(info->map_data->start / info->map_data->x_len) + 0.5;
+	game->map = info->map_data->points;
+	pars_colors_line(info, game);
+}
+
+void	mlx_data_collect(t_mlx_data *mlx_data)
+{
+	mlx_data->mlx = mlx_init();
+	if (!mlx_data->mlx)
+		error("mlx_init_error\n");
+	mlx_data->win = mlx_new_window(mlx_data->mlx, WIDTH, HEIGHT, "CUB");
+	mlx_data->img = mlx_new_image(mlx_data->mlx, WIDTH, HEIGHT);
+	if (!(mlx_data->mlx && mlx_data->img))
+		error("mlx_win_or_img_error\n");
+	mlx_data->addr = mlx_get_data_addr
+		(mlx_data->img, &mlx_data->bits_per_pixel,
+			&mlx_data->line_length, &mlx_data->endian);
+	if (!mlx_data->addr)
+		error("addr_err\n");
+}
+
+int	event_hook(void)
+{
+	exit(0);
+	return (0);
+}
+int	key_hook(int key, t_mlx_data *data)
+{
+	if (key == 53)
+		exit(0);
+	return (0);
+}
 
 int main(int ac, char **av)
 {
 	t_global	*global;
-	t_mlx_data		*data;
+	t_mlx_data	*mlx_data;
+	t_game_data	*game_data;
 
 	if (ac != 2)
 		error("bad argv\n");
@@ -47,27 +91,19 @@ int main(int ac, char **av)
 		error("malloc_error\n");
 	map_open(av[1], global);
 
+	game_data = (t_game_data *) malloc(sizeof(t_game_data));
+	if (!game_data)
+		error("game_malloc error\n");	
+	mlx_data = (t_mlx_data *) malloc(sizeof(t_mlx_data));
+	if (!mlx_data)
+		error("plx_malloc error\n");
 
-
-
-	data = (t_mlx_data *) malloc(sizeof(t_mlx_data));
-	if (!data)
-		error("malloc error\n");
-	data->mlx = mlx_init();
-	if (!data->mlx)
-		error("mlx_init_error\n");
-	data->win = mlx_new_window(data->mlx, HEIGHT, WIDTH, "CUB");
-	data->img = mlx_new_image(data->mlx, HEIGHT, WIDTH);
-	if (!(data->mlx && data->img))
-		error("mlx_win_or_img_error\n");
-	data->addr = mlx_get_data_addr
-		(data->img, &data->bits_per_pixel,
-			&data->line_length, &data->endian);
-	if (!data->addr)
-		error("addr_err\n");
+	game_data_collect(game_data, global);
+	mlx_data_collect(mlx_data);
 
 	
-	//drow_image(data, global);
-
-
+	drow_image(game_data,mlx_data, global);
+	mlx_hook(mlx_data->win, 2, 0, key_hook, mlx_data);
+	mlx_hook(mlx_data->win, 17, 0, event_hook, mlx_data);
+	mlx_loop(mlx_data->mlx);
 }

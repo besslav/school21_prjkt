@@ -3,7 +3,8 @@ CC = gcc
 HEAD	= cub.h
 GFLAGS =  -Wall -Wextra -Werror 
 SRCS = 	cub.c \
-		map_ways_colors.c map_size_collector.c map_init_validate.c \
+		map_ways_colors.c map_size_collector.c map_init_validate.c map_get_colors.c\
+		game_drow_start.c\
 		errors_cleaners.c
 
 
