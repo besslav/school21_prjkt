@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_drow_start.c                                  :+:      :+:    :+:   */
+/*   game_wall_drow.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/06 21:27:52 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/12 17:12:34 by pskip            ###   ########.fr       */
+/*   Created: 2022/07/11 19:51:18 by pskip             #+#    #+#             */
+/*   Updated: 2022/07/12 17:20:57 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	drow_image(t_game_data *game_data, t_mlx_data *mlx_data)
+void	drow_line_of_wall(int h_wall, int x, t_mlx_data *mlx_data)
 {
-	ft_bzero(mlx_data->addr, HEIGHT * WIDTH * (mlx_data->bits_per_pixel / 8));
-	printf("vdfzsfds\n");
-	drow_back(mlx_data, game_data);
-	printf("fsa");
-	throw_rays(game_data, mlx_data);
-
-
-
-
-
-	mlx_put_image_to_window(mlx_data->mlx, mlx_data->win, mlx_data->img, 0, 0);
+	int	i;
+	int	y_start;
+	
+	i = 0;
+	y_start = (HEIGHT - h_wall) / 2;
+	while (i < h_wall)
+	{
+		put_pixel((WIDTH * (y_start + i) + x), mlx_data, newcolor(100,50,100));
+		i++;
+	}
 }

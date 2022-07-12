@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:22 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/08 20:21:42 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/12 17:13:05 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,19 @@ void map_open(char *file_name, t_global *global)
 
 void	game_data_collect(t_game_data *game, t_global *info)
 {
-	if (info->map_data->dir = 'W')
-		game->alpa_player = M_PI;
-	else if (info->map_data->dir = 'E')
-		game->alpa_player = 0;
-	else if (info->map_data->dir = 'N')
-		game->alpa_player = M_PI_2;
-	else if (info->map_data->dir = 'S')
-		game->alpa_player = 3 * M_PI_2;
+	if (info->map_data->dir == 'W')
+		game->alpha_player = M_PI;
+	else if (info->map_data->dir == 'E')
+		game->alpha_player = 0;
+	else if (info->map_data->dir == 'N')
+		game->alpha_player = M_PI_2;
+	else if (info->map_data->dir == 'S')
+		game->alpha_player = 3 * M_PI_2;
 	game->x_player = (float)(info->map_data->start % info->map_data->x_len) + 0.5;
 	game->y_player = (float)(info->map_data->start / info->map_data->x_len) + 0.5;
 	game->map = info->map_data->points;
+	game->x_len = info->map_data->x_len;
+	game->y_len = info->map_data->y_len;
 	pars_colors_line(info, game);
 }
 
@@ -71,10 +73,20 @@ int	event_hook(void)
 	exit(0);
 	return (0);
 }
-int	key_hook(int key, t_mlx_data *data)
+int	key_hook(int key, t_game_data *game, t_mlx_data *mlx_data, t_global *global)
 {
+	printf("%d\n", key);
 	if (key == 53)
 		exit(0);
+	if (key == 13)
+		game->y_player -= 0.1;
+	if (key == 0)
+		game->x_player -= 0.1;
+	if (key == 1)
+		game->y_player += 0.1;
+	if (key == 2)
+		game->x_player += 0.1;
+	drow_image(game, mlx_data);
 	return (0);
 }
 
@@ -102,7 +114,7 @@ int main(int ac, char **av)
 	mlx_data_collect(mlx_data);
 
 	
-	drow_image(game_data,mlx_data, global);
+	drow_image(game_data, mlx_data);
 	mlx_hook(mlx_data->win, 2, 0, key_hook, mlx_data);
 	mlx_hook(mlx_data->win, 17, 0, event_hook, mlx_data);
 	mlx_loop(mlx_data->mlx);

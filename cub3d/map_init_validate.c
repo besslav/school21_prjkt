@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:40:51 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/06 16:46:18 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/11 18:39:49 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	create_map(char *file_name, t_map *map, int map_first_line)
 	int		pos;
 
 	fd = open(file_name, O_RDONLY);
-	map->points = (char *) malloc(sizeof(char) * ((map->x_len * map->y_len)));
+	map->points = (char *) malloc(sizeof(char) * ((map->x_len * map->y_len + 1)));
 	map->walid_visited = (short *) malloc(sizeof(short) * ((map->x_len * map->y_len)));
 	if (!map->points || !map->walid_visited)
 		error("malloc cant init points\n");
@@ -99,5 +99,6 @@ void	create_map(char *file_name, t_map *map, int map_first_line)
 		free(line);
 		line = get_next_line(fd);
 	}
+	map->points[pos] = '\0';
 	is_map_valid(map);
 }

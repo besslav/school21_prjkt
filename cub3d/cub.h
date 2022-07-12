@@ -28,10 +28,12 @@ typedef struct s_map
 
 typedef struct s_game_data
 {
-	float	alpa_player;
+	float	alpha_player;
 	float	x_player;
 	float	y_player;
 	char	*map;
+	int		x_len;
+	int		y_len;
 
 	int		ceilling_color;
 	int		floor_color;
@@ -69,9 +71,16 @@ void		cleaner(char **spl);
 int			is_map(char *row);
 char		*add_info(int fd, t_global *global);
 void		create_map(char *file_name, t_map *map, int	map_first_line);
-void		drow_image(t_game_data *game_data, t_mlx_data *mlx_data, t_global *texturs);
+void		drow_image(t_game_data *game_data, t_mlx_data *mlx_data);
 t_map		*get_size(int fd, char *line);
 
+int			newcolor(int r, int g, int b);
 void		pars_colors_line(t_global *data, t_game_data *game);
+void		drow_back(t_mlx_data *mlx_data, t_game_data *color);
+void		throw_rays(t_game_data *game, t_mlx_data *mlx_data);
+void		drow_line_of_wall(int h_wall, int x, t_mlx_data *mlx_data);
+
+int			array_pos(int	x, int	y, int x_len);
+void		put_pixel(int	pixel, t_mlx_data *mlx_data, int color);
 
 #endif
