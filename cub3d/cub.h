@@ -14,6 +14,7 @@
 # define WIDTH		800
 # define HEIGHT		600
 # define ALPHA_DIF	0.6
+# define STEP		0.1
 # define _USE_MATH_DEFINES
 
 typedef struct s_map
@@ -65,22 +66,29 @@ typedef struct s_mlx_data
 
 }	t_mlx_data;
 
+typedef struct s_all_data
+{
+	t_game_data	*game_data;
+	t_mlx_data	*mlx_data;
+	t_global	*global;
+}	t_all_data;
+
 
 void		error(char *err);
 void		cleaner(char **spl);
 int			is_map(char *row);
 char		*add_info(int fd, t_global *global);
 void		create_map(char *file_name, t_map *map, int	map_first_line);
-void		drow_image(t_game_data *game_data, t_mlx_data *mlx_data);
+void		drow_image(t_all_data *all_data);
 t_map		*get_size(int fd, char *line);
 
 int			newcolor(int r, int g, int b);
 void		pars_colors_line(t_global *data, t_game_data *game);
 void		drow_back(t_mlx_data *mlx_data, t_game_data *color);
-void		throw_rays(t_game_data *game, t_mlx_data *mlx_data);
+void		throw_rays(t_all_data *all_data);
 void		drow_line_of_wall(int h_wall, int x, t_mlx_data *mlx_data);
 
 int			array_pos(int	x, int	y, int x_len);
-void		put_pixel(int	pixel, t_mlx_data *mlx_data, int color);
+void		put_pixel(int x, int y, t_mlx_data *mlx_data, int color);
 
 #endif

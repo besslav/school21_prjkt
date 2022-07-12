@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:22 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/12 17:13:05 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/12 21:08:15 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,52 @@ int	event_hook(void)
 	exit(0);
 	return (0);
 }
-int	key_hook(int key, t_game_data *game, t_mlx_data *mlx_data, t_global *global)
+
+void	count_new_player_pos(t_game_data *game, float dir)
 {
-	printf("%d\n", key);
+	float	x_new;
+	float	y_new;
+
+	x_new = game->x_player + STEP * cos(game->alpha_player + dir);
+	y_new = game->y_player - STEP * sin(game->alpha_player + dir);
+
+	if (game->map[array_pos((int)x_new, (int)y_new, game->x_len)] != '1')
+	{
+		game->x_player = x_new;
+		game->y_player = y_new;
+	}
+}
+
+int	key_hook(int key, t_all_data *all_data)
+{
 	if (key == 53)
 		exit(0);
 	if (key == 13)
-		game->y_player -= 0.1;
+		count_new_player_pos(all_data->game_data, 0);
 	if (key == 0)
-		game->x_player -= 0.1;
+		count_new_player_pos(all_data->game_data, M_PI_2);
 	if (key == 1)
-		game->y_player += 0.1;
+		count_new_player_pos(all_data->game_data, M_PI);
 	if (key == 2)
-		game->x_player += 0.1;
-	drow_image(game, mlx_data);
+		count_new_player_pos(all_data->game_data, -M_PI_2);
+	if (key == 123)
+		all_data->game_data->alpha_player += 0.03;
+	if (key == 124)
+		all_data->game_data->alpha_player -= 0.03;	
+	drow_image(all_data);
 	return (0);
+}
+
+t_all_data	*all_data_group(t_game_data *game_data, t_mlx_data *mlx_data)
+{
+	t_all_data	*all_data;
+
+	all_data = (t_all_data *)malloc(sizeof(all_data));
+	if (!all_data)
+		error("all_data_malloc_error\n");
+	all_data->game_data = game_data;
+	all_data->mlx_data = mlx_data;
+	return (all_data);
 }
 
 int main(int ac, char **av)
@@ -95,6 +126,7 @@ int main(int ac, char **av)
 	t_global	*global;
 	t_mlx_data	*mlx_data;
 	t_game_data	*game_data;
+	t_all_data	*all_data;
 
 	if (ac != 2)
 		error("bad argv\n");
@@ -112,10 +144,11 @@ int main(int ac, char **av)
 
 	game_data_collect(game_data, global);
 	mlx_data_collect(mlx_data);
+	all_data = all_data_group(game_data, mlx_data);
 
 	
-	drow_image(game_data, mlx_data);
-	mlx_hook(mlx_data->win, 2, 0, key_hook, mlx_data);
-	mlx_hook(mlx_data->win, 17, 0, event_hook, mlx_data);
+	drow_image(all_data);
+	mlx_hook(mlx_data->win, 2, 0, key_hook, all_data);
+	mlx_hook(mlx_data->win, 17, 0, event_hook, all_data);
 	mlx_loop(mlx_data->mlx);
 }
