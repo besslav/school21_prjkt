@@ -76,7 +76,7 @@ typedef struct s_textures
 	// t_img_data	*west;
 	// t_img_data	*east;
 	//or
-	//t_img_data	**wall_textures;
+	t_img_data	**wall_textures;
 }	t_textures;
 
 typedef struct s_all_data
