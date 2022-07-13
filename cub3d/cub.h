@@ -27,19 +27,6 @@ typedef struct s_map
 	char	dir;
 }   t_map;
 
-typedef struct s_game_data
-{
-	float	alpha_player;
-	float	x_player;
-	float	y_player;
-	char	*map;
-	int		x_len;
-	int		y_len;
-
-	int		ceilling_color;
-	int		floor_color;
-}	t_game_data;
-
 typedef struct s_global
 {
 	char	*north;
@@ -53,24 +40,44 @@ typedef struct s_global
 
 }   t_global;
 
-typedef struct s_mlx_data
+typedef struct s_game_data
 {
-	void	*mlx;
-	void	*win;
+	float	alpha_player;
+	float	x_player;
+	float	y_player;
+	char	*map;
+	int		x_len;
+	int		y_len;
+	int		ceilling_color;
+	int		floor_color;
+}	t_game_data;
+
+typedef struct s_img_data
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+}	t_img_data;
 
-
-}	t_mlx_data;
+typedef struct s_textures
+{
+	int			ceilling_color;
+	int			floor_color;
+	t_img_data	*north;
+	t_img_data	*south;
+	t_img_data	*west;
+	t_img_data	*east;
+}	t_textures;
 
 typedef struct s_all_data
 {
 	t_game_data	*game_data;
-	t_mlx_data	*mlx_data;
-	t_global	*global;
+	t_img_data	*screen_img_data;
+	t_textures	*textures;
+	void		*mlx;
+	void		*win;
 }	t_all_data;
 
 
@@ -84,11 +91,12 @@ t_map		*get_size(int fd, char *line);
 
 int			newcolor(int r, int g, int b);
 void		pars_colors_line(t_global *data, t_game_data *game);
-void		drow_back(t_mlx_data *mlx_data, t_game_data *color);
+void		drow_back(t_img_data *img_data, t_game_data *color);
 void		throw_rays(t_all_data *all_data);
-void		drow_line_of_wall(int h_wall, int x, t_mlx_data *mlx_data);
+void		drow_line_of_wall(int h_wall, int x, t_img_data *screen_data);
 
 int			array_pos(int	x, int	y, int x_len);
-void		put_pixel(int x, int y, t_mlx_data *mlx_data, int color);
+void		put_pixel(int x, int y, t_img_data *img_data, int color);
 
+void	all_data_group(t_global *global, t_all_data *all_data);
 #endif

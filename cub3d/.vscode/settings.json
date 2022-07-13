@@ -13,6 +13,7 @@
         "vector": "c",
         "ranges": "c",
         "mlx.h": "c",
-        "__locale": "c"
+        "__locale": "c",
+        "cub.h": "c"
     }
 }

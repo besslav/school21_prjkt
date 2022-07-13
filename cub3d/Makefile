@@ -4,6 +4,7 @@ HEAD	= cub.h
 GFLAGS =  -Wall -Wextra -Werror 
 SRCS = 	cub.c \
 		map_ways_colors.c map_size_collector.c map_init_validate.c map_get_colors.c\
+		data_creator.c\
 		game_drow_start.c game_drow_fl_ceil.c game_utils.c game_wall_drow.c game_throw_rays.c\
 		errors_cleaners.c
 
