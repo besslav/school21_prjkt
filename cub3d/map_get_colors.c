@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 15:50:50 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/08 17:29:25 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/13 19:19:15 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int		newcolor(int r, int g, int b)
 {
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255 )
+		error("bad_color_line\n");
 	return (((0xFF & (r)) << 16) | ((0xFF & (g)) << 8) | (0xFF & (b)));
 }
 
-void	pars_colors_line(t_global *data, t_game_data *game)
+void	pars_colors_line(t_global *data, t_textures *game)
 {
 	char	**splited_color_line;
 	int		int_line[3];

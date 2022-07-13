@@ -6,13 +6,13 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:51:18 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/13 16:35:36 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/13 19:08:59 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	drow_line_of_wall(int h_wall, int x, t_img_data *screen_data)
+void	drow_line_of_wall(int h_wall, int x, t_img_data *screen_data, int color)
 {
 	int	i;
 	int	y_start;
@@ -21,7 +21,7 @@ void	drow_line_of_wall(int h_wall, int x, t_img_data *screen_data)
 	y_start = (HEIGHT - h_wall) / 2;
 	while (i < h_wall)
 	{
-		put_pixel(x, y_start + i, screen_data, newcolor(100,50,100));
+		put_pixel(x, y_start + i, screen_data, color);
 		i++;
 	}
 }

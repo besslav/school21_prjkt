@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:44:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/13 16:59:50 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/13 20:05:02 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	game_data_collect(t_global *info, t_game_data *game)
 	game->map = info->map_data->points;
 	game->x_len = info->map_data->x_len;
 	game->y_len = info->map_data->y_len;
-	pars_colors_line(info, game);
 }
 
 void	screen_data_collect(t_img_data *img_data, t_all_data *all_data)
@@ -48,20 +47,39 @@ void	screen_data_collect(t_img_data *img_data, t_all_data *all_data)
 		error("addr_err\n");
 }
 
+void	textur_data_collect(t_textures *texturs, t_global *global)
+{
+	pars_colors_line(global, texturs);
+
+	texturs->walls = (int *) malloc(4 * sizeof(int));
+	if (!texturs->walls)
+		error("textur_init_error\n");
+	texturs->walls[NORTH] = newcolor(0, 50, 250);
+	texturs->walls[SOUTH] = newcolor(50, 150, 20);
+	texturs->walls[EAST] = newcolor(175, 175, 50);
+	texturs->walls[WEST] = newcolor(10, 50, 100);
+}
+
 void	all_data_group(t_global *global, t_all_data *all_data)
 {
 	t_game_data	*game;
 	t_img_data	*img_data;
+	t_textures	*texturs;
 
 	game = (t_game_data *) malloc(sizeof(t_game_data));
 	if (!game)
 		error("game_malloc error\n");
 	game_data_collect(global, game);
-
 	img_data = (t_img_data *) malloc(sizeof(t_img_data));
 	if (!img_data)
 		error("img_malloc error\n");
 	screen_data_collect(img_data, all_data);
+	texturs = (t_textures *) malloc(sizeof(t_textures));
+	if (!texturs)
+		error("img_malloc error\n");
+	textur_data_collect(texturs, global);
+
 	all_data->game_data = game;
 	all_data->screen_img_data = img_data;
+	all_data->textures = texturs;
 }
