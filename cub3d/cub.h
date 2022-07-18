@@ -44,6 +44,16 @@ typedef struct s_global
 
 }   t_global;
 
+typedef struct s_ray
+{
+	int		x_dir;
+	int		y_dir;
+	int		x_pos;
+	int		y_pos;
+	float	x_ray_len;
+	float	y_ray_len;
+}	t_ray;
+
 typedef struct s_game_data
 {
 	float	alpha_player;
@@ -52,6 +62,7 @@ typedef struct s_game_data
 	char	*map;
 	int		x_len;
 	int		y_len;
+	int		side;
 }	t_game_data;
 
 typedef struct s_img_data

@@ -14,6 +14,10 @@
         "ranges": "c",
         "mlx.h": "c",
         "__locale": "c",
-        "cub.h": "c"
+        "cub.h": "c",
+        "random": "c",
+        "complex": "c",
+        "cmath": "c",
+        "stdio.h": "c"
     }
 }
