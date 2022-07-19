@@ -14,7 +14,7 @@
 # define WIDTH		800
 # define HEIGHT		600
 # define ALPHA_DIF	0.6
-# define STEP		0.1
+# define STEP		0.2
 # define _USE_MATH_DEFINES
 # define NORTH	0
 # define SOUTH	1
@@ -48,8 +48,8 @@ typedef struct s_ray
 {
 	int		x_dir;
 	int		y_dir;
-	int		x_pos;
-	int		y_pos;
+	float		x_pos;
+	float		y_pos;
 	float	x_ray_len;
 	float	y_ray_len;
 }	t_ray;
@@ -80,14 +80,7 @@ typedef struct s_textures
 	int			floor_color;
 
 	int			*walls;
-
-	//
-	// t_img_data	*north;
-	// t_img_data	*south;
-	// t_img_data	*west;
-	// t_img_data	*east;
-	//or
-	t_img_data	**wall_textures;
+	void		**wall_textures;
 }	t_textures;
 
 typedef struct s_all_data
@@ -112,7 +105,7 @@ int			newcolor(int r, int g, int b);
 void		pars_colors_line(t_global *data, t_textures *game);
 void		drow_back(t_img_data *img_data, t_textures *color);
 void		throw_rays(t_all_data *all_data);
-void		drow_line_of_wall(int h_wall, int x, t_img_data *screen_data, int color);
+void	drow_line_of_wall(int h_wall, int x, t_all_data *all_data, int color);
 
 int			array_pos(int	x, int	y, int x_len);
 void		put_pixel(int x, int y, t_img_data *img_data, int color);
