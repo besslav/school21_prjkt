@@ -72,6 +72,8 @@ typedef struct s_img_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img_data;
 
 typedef struct s_textures
@@ -80,7 +82,7 @@ typedef struct s_textures
 	int			floor_color;
 
 	int			*walls;
-	void		**wall_textures;
+	t_img_data	*wall_textures;
 }	t_textures;
 
 typedef struct s_all_data

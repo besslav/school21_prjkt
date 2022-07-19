@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:44:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/19 18:45:54 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/19 21:35:30 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,28 +60,32 @@ void	screen_data_collect(t_img_data *img_data, t_all_data *all_data)
 // 	texturs->walls[WEST] = newcolor(10, 50, 100);
 // }
 
-void	textur_data_collect(t_textures *texturs, t_global *global, void *mlx)
-{
-	pars_colors_line(global, texturs);
-	// texturs->wall_textures = (void **) malloc(4 * sizeof(void *));
-	// if (!texturs->wall_textures)
-	// 	error("textur_init_error\n");
-	// texturs->wall_textures[NORTH] = mlx_xpm_file_to_image(mlx, global->north, NULL, NULL);
-	// texturs->wall_textures[SOUTH] = mlx_xpm_file_to_image(mlx, global->south, NULL, NULL);
-	// texturs->wall_textures[EAST] = mlx_xpm_file_to_image(mlx, global->east, NULL, NULL);
-	// texturs->wall_textures[WEST] = mlx_xpm_file_to_image(mlx, global->west, NULL, NULL);
-	// if (!texturs->wall_textures[NORTH] || texturs->wall_textures[SOUTH]
-	// 	|| texturs->wall_textures[EAST] || texturs->wall_textures[WEST])
-	// 	error("wall_texturs_init_error\n");
+void	textur_data_collect(t_img_data *wall_textures, t_global *global, void *mlx)
+{	
+	char	*dirs[4];
+	int		i;
 
-	texturs->walls = (int *) malloc(4 * sizeof(int));
-	if (!texturs->walls)
+	dirs[NORTH] = global->north;
+	dirs[SOUTH] = global->south;
+	dirs[EAST] = global->east;
+	dirs[WEST] = global->west;
+	wall_textures = (t_img_data*) malloc(4 * sizeof(t_img_data));
+	if (!wall_textures)
 		error("textur_init_error\n");
-	texturs->walls[NORTH] = newcolor(0, 50, 250);
-	texturs->walls[SOUTH] = newcolor(50, 150, 20);
-	texturs->walls[EAST] = newcolor(175, 175, 50);
-	texturs->walls[WEST] = newcolor(10, 50, 100);
-
+	i = -1;
+	while (++i < 4)
+		wall_textures[i].img = mlx_xpm_file_to_image(mlx, dirs[i],
+			&wall_textures[i].width, &wall_textures[i].height);
+	if (!wall_textures[NORTH].img || !wall_textures[SOUTH].img
+		|| !wall_textures[EAST].img || !wall_textures[WEST].img)
+		error("wall_texturs_init_error\n");
+	while (--i >= 0)
+		wall_textures[i].addr = mlx_get_data_addr
+			(wall_textures[i].img, &wall_textures[i].bits_per_pixel,
+				&wall_textures[i].line_length, &wall_textures[i].endian);	
+	if (!wall_textures[NORTH].addr || !wall_textures[SOUTH].addr
+		|| !wall_textures[EAST].addr || !wall_textures[WEST].addr)
+		error("wall_texturs_init_addr_error\n");
 }
 
 void	all_data_group(t_global *global, t_all_data *all_data)
@@ -101,7 +105,19 @@ void	all_data_group(t_global *global, t_all_data *all_data)
 	texturs = (t_textures *) malloc(sizeof(t_textures));
 	if (!texturs)
 		error("img_malloc error\n");
-	textur_data_collect(texturs, global, all_data->mlx);
+	pars_colors_line(global, texturs);
+	textur_data_collect(texturs->wall_textures, global, all_data->mlx);
+
+
+	texturs->walls = (int *) malloc(4 * sizeof(int));
+	if (!texturs->walls)
+		error("textur_init_error\n");
+	texturs->walls[NORTH] = newcolor(0, 50, 250);
+	texturs->walls[SOUTH] = newcolor(50, 150, 20);
+	texturs->walls[EAST] = newcolor(175, 175, 50);
+	texturs->walls[WEST] = newcolor(10, 50, 100);
+
+
 
 	all_data->game_data = game;
 	all_data->screen_img_data = img_data;
