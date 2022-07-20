@@ -6,22 +6,40 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:51:18 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/19 15:57:06 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/20 20:45:23 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	drow_line_of_wall(int h_wall, int x, t_all_data *all_data, int color)
+int	get_pixel_color_from_img(t_img_data *textura, int x, int y)
 {
-	int	i;
-	int	y_start;
-	
-	i = 0;
+	char	*pixel;
+	pixel = textura->addr + (y * textura->line_length + x * (textura->bits_per_pixel / 8));
+	return (*(int*)pixel);
+}
+
+
+void	drow_line_of_wall(int h_wall, int x, t_all_data *all_data)
+{
+	float	y_pos;
+	int		y_start;
+	int		color;
+	float	step;
+	int		i;
+	int		x_in_img;
+	float		y_in_img;
+
+	x_in_img = all_data->textures->wall_textures[all_data->game_data->side].width
+		* (all_data->game_data->x_img_global_pos - floor(all_data->game_data->x_img_global_pos));
+	step = all_data->textures->wall_textures[all_data->game_data->side].height / h_wall;
 	y_start = (HEIGHT - h_wall) / 2;
-	while (i < h_wall)
+	i = -1;
+	y_in_img = 0;
+	while (++i < h_wall)
 	{
+		color = get_pixel_color_from_img(&all_data->textures->wall_textures[all_data->game_data->side], x_in_img, (int)y_in_img);
 		put_pixel(x, y_start + i, all_data->screen_img_data, color);
-		i++;
+		y_in_img += step;
 	}
 }

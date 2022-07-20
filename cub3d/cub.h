@@ -63,6 +63,7 @@ typedef struct s_game_data
 	int		x_len;
 	int		y_len;
 	int		side;
+	float	x_img_global_pos;
 }	t_game_data;
 
 typedef struct s_img_data
@@ -80,8 +81,6 @@ typedef struct s_textures
 {
 	int			ceilling_color;
 	int			floor_color;
-
-	int			*walls;
 	t_img_data	*wall_textures;
 }	t_textures;
 
@@ -107,9 +106,9 @@ int			newcolor(int r, int g, int b);
 void		pars_colors_line(t_global *data, t_textures *game);
 void		drow_back(t_img_data *img_data, t_textures *color);
 void		throw_rays(t_all_data *all_data);
-void	drow_line_of_wall(int h_wall, int x, t_all_data *all_data, int color);
+void		drow_line_of_wall(int h_wall, int x, t_all_data *all_data);
 
-int			array_pos(int	x, int	y, int x_len);
+int			array_pos(int x, int y, int x_len);
 void		put_pixel(int x, int y, t_img_data *img_data, int color);
 
 void		all_data_group(t_global *global, t_all_data *all_data);

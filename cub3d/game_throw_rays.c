@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:52:49 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/19 19:39:13 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/20 20:44:55 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ int is_wall(t_ray *ray, float alpha, t_game_data *game_data, char x_y)
 		len = ray->y_ray_len;
 	x = (game_data->x_player + cosf(alpha) * len);
 	y = (game_data->y_player - sinf(alpha) * len);
+	if (x_y == 'x')
+		game_data->x_img_global_pos = y;
+	else
+		game_data->x_img_global_pos = x;
 	game_data->side = get_side(ray, x_y);
 	if (x_y == 'y' && ray->y_dir == -1)
 		y -= 1;
@@ -110,13 +114,13 @@ void	two_ray(t_all_data *all_data, float step_alpha, int i)
 	if (dist > 0)
 	{
 		wall_h = HEIGHT / (dist * cos(ALPHA_DIF - step_alpha * i));
-		drow_line_of_wall(wall_h, i, all_data, all_data->textures->walls[all_data->game_data->side]);	
+		drow_line_of_wall(wall_h, i, all_data);	
 	}
 	dist = ray_len(all_data->game_data, all_data->game_data->alpha_player - step_alpha * i);
 	if (dist > 0)
 	{
 		wall_h = HEIGHT / (dist * cos(step_alpha * i));
-		drow_line_of_wall(wall_h, i + 400, all_data, all_data->textures->walls[all_data->game_data->side]);
+		drow_line_of_wall(wall_h, i + 400, all_data);
 	}
 }
 
