@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:22 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/20 21:04:51 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/23 16:21:26 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void	count_new_player_pos(t_game_data *game, float dir)
 		game->x_player = x_new;
 		game->y_player = y_new;
 	}
+	else if (game->map[array_pos((int)x_new, (int)game->y_player, game->x_len)] != '1')
+		game->x_player = x_new;
+	else if (game->map[array_pos((int)game->x_player, (int)y_new, game->x_len)] != '1')
+		game->y_player = y_new;	
 }
 
 int	key_hook(int key, t_all_data *all_data)

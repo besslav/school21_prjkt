@@ -112,4 +112,6 @@ int			array_pos(int x, int y, int x_len);
 void		put_pixel(int x, int y, t_img_data *img_data, int color);
 
 void		all_data_group(t_global *global, t_all_data *all_data);
+
+void		drow_minimap(t_all_data *all_data);
 #endif
