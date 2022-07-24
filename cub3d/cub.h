@@ -11,8 +11,8 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define WIDTH		800
-# define HEIGHT		600
+# define WIDTH		1000
+# define HEIGHT		800
 # define ALPHA_DIF	0.6
 # define STEP		0.2
 # define _USE_MATH_DEFINES
@@ -63,7 +63,8 @@ typedef struct s_game_data
 	int		x_len;
 	int		y_len;
 	int		side;
-	float	x_img_global_pos;
+	float	x_img_pos;
+	int		x_mouse;
 }	t_game_data;
 
 typedef struct s_img_data

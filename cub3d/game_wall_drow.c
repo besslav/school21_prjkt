@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:51:18 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/20 20:45:23 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/24 14:59:46 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	drow_line_of_wall(int h_wall, int x, t_all_data *all_data)
 	float		y_in_img;
 
 	x_in_img = all_data->textures->wall_textures[all_data->game_data->side].width
-		* (all_data->game_data->x_img_global_pos - floor(all_data->game_data->x_img_global_pos));
-	step = all_data->textures->wall_textures[all_data->game_data->side].height / h_wall;
+		* (all_data->game_data->x_img_pos);
+	step = (float)all_data->textures->wall_textures[all_data->game_data->side].height / (float)h_wall;
 	y_start = (HEIGHT - h_wall) / 2;
 	i = -1;
 	y_in_img = 0;

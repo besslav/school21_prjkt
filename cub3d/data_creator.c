@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:44:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/20 20:45:44 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/24 17:08:42 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,6 @@ void	screen_data_collect(t_img_data *img_data, t_all_data *all_data)
 		error("addr_err\n");
 }
 
-// void	textur_data_collect(t_textures *texturs, t_global *global)
-// {
-// 	pars_colors_line(global, texturs);
-
-// 	texturs->walls = (int *) malloc(4 * sizeof(int));
-// 	if (!texturs->walls)
-// 		error("textur_init_error\n");
-// 	texturs->walls[NORTH] = newcolor(0, 50, 250);
-// 	texturs->walls[SOUTH] = newcolor(50, 150, 20);
-// 	texturs->walls[EAST] = newcolor(175, 175, 50);
-// 	texturs->walls[WEST] = newcolor(10, 50, 100);
-// }
-
 void	textur_data_collect(t_textures *textures, t_global *global, void *mlx)
 {	
 	char	*dirs[4];
@@ -93,6 +80,7 @@ void	all_data_group(t_global *global, t_all_data *all_data)
 	t_game_data	*game;
 	t_img_data	*img_data;
 	t_textures	*texturs;
+	//int			y;
 
 	game = (t_game_data *) malloc(sizeof(t_game_data));
 	if (!game)
@@ -110,4 +98,5 @@ void	all_data_group(t_global *global, t_all_data *all_data)
 	all_data->game_data = game;
 	all_data->screen_img_data = img_data;
 	all_data->textures = texturs;
+	//mlx_mouse_get_pos(all_data->mlx, &all_data->game_data->x_mouse, &y);
 }
