@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/24 18:28:26 by pskip             #+#    #+#             */
+/*   Updated: 2022/07/24 21:29:15 by pskip            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB_H
 # define CUB_H
 
@@ -29,7 +41,7 @@ typedef struct s_map
 	int		x_len;
 	int		start;
 	char	dir;
-}   t_map;
+}	t_map;
 
 typedef struct s_global
 {
@@ -42,14 +54,14 @@ typedef struct s_global
 	t_map	*map_data;
 	int		line_start;
 
-}   t_global;
+}	t_global;
 
 typedef struct s_ray
 {
 	int		x_dir;
 	int		y_dir;
-	float		x_pos;
-	float		y_pos;
+	float	x_pos;
+	float	y_pos;
 	float	x_ray_len;
 	float	y_ray_len;
 }	t_ray;
@@ -94,25 +106,38 @@ typedef struct s_all_data
 	void		*win;
 }	t_all_data;
 
+typedef struct s_drow
+{
+	int		y_start;
+	int		color;
+	float	step;
+	int		x_in_img;
+	float	y_in_img;
+}	t_drow;
 
-void		error(char *err);
-void		cleaner(char **spl);
-int			is_map(char *row);
-char		*add_info(int fd, t_global *global);
-void		create_map(char *file_name, t_map *map, int	map_first_line);
-void		drow_image(t_all_data *all_data);
-t_map		*get_size(int fd, char *line);
+char	*add_info(int fd, t_global *global);
+t_map	*get_size(int fd, char *line);
+void	create_map(char *file_name, t_map *map, int map_first_line);
+void	is_map_close(t_map *map);
 
-int			newcolor(int r, int g, int b);
-void		pars_colors_line(t_global *data, t_textures *game);
-void		drow_back(t_img_data *img_data, t_textures *color);
-void		throw_rays(t_all_data *all_data);
-void		drow_line_of_wall(int h_wall, int x, t_all_data *all_data);
+void	error(char *err);
+void	cleaner(char **spl);
+int		newcolor(int r, int g, int b);
+int		array_pos(int x, int y, int x_len);
+void	put_pixel(int x, int y, t_img_data *img_data, int color);
 
-int			array_pos(int x, int y, int x_len);
-void		put_pixel(int x, int y, t_img_data *img_data, int color);
+void	all_data_group(t_global *global, t_all_data *all_data);
+void	pars_colors_line(t_global *data, t_textures *game);
+void	drow_back(t_img_data *img_data, t_textures *color);
+void	throw_rays(t_all_data *all_data);
+float	ray_len(t_game_data *game, float alpha);
+void	drow_line_of_wall(int h_wall, int x, t_all_data *all_data);
+void	drow_image(t_all_data *all_data);
 
-void		all_data_group(t_global *global, t_all_data *all_data);
+int		mouse_hook(t_all_data *all_data);
+int		key_hook(int key, t_all_data *all_data);
+int		event_hook(void);
 
-void		drow_minimap(t_all_data *all_data);
+void	drow_minimap(t_all_data *all_data);
+
 #endif

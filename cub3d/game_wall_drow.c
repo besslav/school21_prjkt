@@ -6,40 +6,42 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:51:18 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 14:59:46 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/24 21:29:40 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	get_pixel_color_from_img(t_img_data *textura, int x, int y)
+static int	get_pixel_color_from_img(t_img_data *textura, int x, int y)
 {
 	char	*pixel;
-	pixel = textura->addr + (y * textura->line_length + x * (textura->bits_per_pixel / 8));
-	return (*(int*)pixel);
+
+	pixel = textura->addr
+		+ (y * textura->line_length + x * (textura->bits_per_pixel / 8));
+	return (*(int *)pixel);
 }
 
-
-void	drow_line_of_wall(int h_wall, int x, t_all_data *all_data)
+void	drow_line_of_wall(int h_wall, int screen_x, t_all_data *all_data)
 {
-	float	y_pos;
-	int		y_start;
-	int		color;
-	float	step;
-	int		i;
-	int		x_in_img;
-	float		y_in_img;
+	t_drow		drow;
+	int			i;
+	int			side;
+	t_img_data	*wall;
 
-	x_in_img = all_data->textures->wall_textures[all_data->game_data->side].width
+	wall = all_data->textures->wall_textures;
+	side = all_data->game_data->side;
+	drow.x_in_img = wall[side].width
 		* (all_data->game_data->x_img_pos);
-	step = (float)all_data->textures->wall_textures[all_data->game_data->side].height / (float)h_wall;
-	y_start = (HEIGHT - h_wall) / 2;
+	drow.step = (float)wall[side].height / (float)h_wall;
+	drow.y_start = (HEIGHT - h_wall) / 2;
 	i = -1;
-	y_in_img = 0;
+	drow.y_in_img = 0;
 	while (++i < h_wall)
 	{
-		color = get_pixel_color_from_img(&all_data->textures->wall_textures[all_data->game_data->side], x_in_img, (int)y_in_img);
-		put_pixel(x, y_start + i, all_data->screen_img_data, color);
-		y_in_img += step;
+		drow.color = get_pixel_color_from_img(&wall[side],
+				drow.x_in_img, (int)drow.y_in_img);
+		put_pixel(screen_x, drow.y_start + i,
+			all_data->screen_img_data, drow.color);
+		drow.y_in_img += drow.step;
 	}
 }

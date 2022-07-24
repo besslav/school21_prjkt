@@ -6,23 +6,23 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 17:09:44 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/06 16:04:56 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/24 20:11:46 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	get_len(char *line)
+static int	get_len(char *line)
 {
 	int	len;
-	
+
 	len = 0;
-	while(line[len] && line[len] != '\n')
+	while (line[len] && line[len] != '\n')
 		len++;
 	return (len);
 }
 
-void	check_after_empty_line(int fd)
+static void	check_after_empty_line(int fd)
 {
 	char	*line;
 	int		len;
@@ -41,7 +41,7 @@ void	check_after_empty_line(int fd)
 t_map	*get_size(int fd, char *line)
 {
 	int		row_len;
-	t_map 	*map;
+	t_map	*map;
 
 	map = (t_map *) malloc(sizeof(t_map));
 	if (!map)
@@ -52,7 +52,7 @@ t_map	*get_size(int fd, char *line)
 	{
 		row_len = get_len(line);
 		if (row_len < 1)
-			break;
+			break ;
 		map->y_len++;
 		if (row_len > map->x_len)
 			map->x_len = row_len;

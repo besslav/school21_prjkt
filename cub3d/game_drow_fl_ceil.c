@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:37:28 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/13 19:14:35 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/24 19:07:10 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ void	drow_back(t_img_data *img_data, t_textures *color)
 	pixel = 0;
 	while (pixel < pixels_num / 2)
 	{
-		put_pixel(pixel % WIDTH, pixel / WIDTH, img_data, color->ceilling_color);
+		put_pixel(pixel % WIDTH, pixel / WIDTH,
+			img_data, color->ceilling_color);
 		pixel++;
 	}
 	while (pixel < pixels_num)

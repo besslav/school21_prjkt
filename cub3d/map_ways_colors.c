@@ -6,15 +6,13 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:52:53 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/08 15:53:42 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/24 20:11:43 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-
-
-char	*mall_zone(char *zone, char *for_save)
+static char	*mall_zone(char *zone, char *for_save)
 {
 	int	i;
 
@@ -24,7 +22,7 @@ char	*mall_zone(char *zone, char *for_save)
 	if (!zone)
 		error("malloc_dir_or_collor\n");
 	i = 0;
-	while(for_save[i] && for_save[i] != '\n')
+	while (for_save[i] && for_save[i] != '\n')
 	{
 		zone[i] = for_save[i];
 		i++;
@@ -32,7 +30,7 @@ char	*mall_zone(char *zone, char *for_save)
 	return (zone);
 }
 
-void	switch_type(char **s_row, t_global *global)
+static void	switch_type(char **s_row, t_global *global)
 {
 	if (!ft_strncmp(s_row[0], "NO", 3))
 		global->north = mall_zone(global->north, s_row[1]);
@@ -50,7 +48,7 @@ void	switch_type(char **s_row, t_global *global)
 		error("incorrect_data\n");
 }
 
-int	is_map(char *row)
+static int	is_map(char *row)
 {
 	char	*maps_char;
 	int		i;
@@ -65,7 +63,7 @@ int	is_map(char *row)
 	return (0);
 }
 
-void	data_check(t_global *global)
+static void	data_check(t_global *global)
 {
 	if (!global->ceilling || !global->east
 		|| !global->floor || !global->north
@@ -88,7 +86,7 @@ char	*add_info(int fd, t_global *global)
 		{
 			data_check(global);
 			cleaner(splitted_row);
-			break;
+			break ;
 		}
 		global->line_start++;
 		if (splitted_row[0][0] != '\n')

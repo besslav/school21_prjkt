@@ -20,6 +20,7 @@
         "cmath": "c",
         "stdio.h": "c",
         "libft.h": "c",
-        "ios": "c"
+        "ios": "c",
+        "get_next_line.h": "c"
     }
 }
