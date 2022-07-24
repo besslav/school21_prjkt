@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:22 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 17:07:57 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/24 17:46:56 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,26 +79,26 @@ int	key_hook(int key, t_all_data *all_data)
 	return (0);
 }
 
-// int	mouse_hook(t_all_data *all_data)
-// {
-// 	int	x;
-// 	int	y;
+int	mouse_hook(t_all_data *all_data)
+{
+	int	x;
+	int	y;
 
-// 	mlx_mouse_get_pos(all_data->win, &x, &y);
-// 	if (all_data->game_data->x_mouse > x)
-// 	{
-// 		all_data->game_data->alpha_player += 0.1;
-// 		all_data->game_data->x_mouse = x;
-// 		drow_image(all_data);
-// 	}
-// 	else if(all_data->game_data->x_mouse < x)
-// 	{
-// 		all_data->game_data->alpha_player -= 0.1;
-// 		all_data->game_data->x_mouse = x;
-// 		drow_image(all_data);
-// 	}
-// 	return (0);
-// }
+	mlx_mouse_get_pos(all_data->win, &x, &y);
+	if (all_data->game_data->x_mouse > x)
+	{
+		all_data->game_data->alpha_player += 0.05;
+		all_data->game_data->x_mouse = x;
+		drow_image(all_data);
+	}
+	else if(all_data->game_data->x_mouse < x)
+	{
+		all_data->game_data->alpha_player -= 0.05;
+		all_data->game_data->x_mouse = x;
+		drow_image(all_data);
+	}
+	return (0);
+}
 
 int main(int ac, char **av)
 {
@@ -116,7 +116,7 @@ int main(int ac, char **av)
 		error("all_data_malloc_error\n");	
 	all_data_group(global, all_data);
 	drow_image(all_data);
-	//mlx_loop_hook(all_data->mlx, mouse_hook, all_data);
+	mlx_loop_hook(all_data->mlx, mouse_hook, all_data);
 	mlx_hook(all_data->win, 2, 0, key_hook, all_data);
 	mlx_hook(all_data->win, 17, 0, event_hook, all_data);
 

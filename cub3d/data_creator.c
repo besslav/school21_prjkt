@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:44:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 17:08:42 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/24 17:42:21 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	all_data_group(t_global *global, t_all_data *all_data)
 	t_game_data	*game;
 	t_img_data	*img_data;
 	t_textures	*texturs;
-	//int			y;
+	int			y;
 
 	game = (t_game_data *) malloc(sizeof(t_game_data));
 	if (!game)
@@ -95,8 +95,8 @@ void	all_data_group(t_global *global, t_all_data *all_data)
 		error("img_malloc error\n");
 	pars_colors_line(global, texturs);
 	textur_data_collect(texturs, global, all_data->mlx);
+	mlx_mouse_get_pos(all_data->win, &game->x_mouse, &y);
 	all_data->game_data = game;
 	all_data->screen_img_data = img_data;
 	all_data->textures = texturs;
-	//mlx_mouse_get_pos(all_data->mlx, &all_data->game_data->x_mouse, &y);
 }
