@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:52:53 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 20:11:43 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/25 21:46:48 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static int	is_map(char *row)
 	char	*maps_char;
 	int		i;
 
-	maps_char = "01 ";
+	maps_char = "012 ";
 	i = -1;
-	while (++i < 3)
+	while (++i < 4)
 	{
 		if (maps_char[i] == row[0])
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:22 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 22:05:51 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/26 19:03:28 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,17 @@ void	*map_open(char *file_name, t_global	*global)
 	free(global->map_data->walid_visited);
 }
 
-// void	free_global(t_global *data)
-// {
-// 	free(data->east);
-// 	free(data->ceilling);
-// 	free(data->floor);
-// 	free(data->north);
-// 	free(data->south);
-// 	free(data->west);
-// 	free(data->map_data->walid_visited);
-// 	free(data->map_data);
-// 	free(data);
-// }
+void	free_global(t_global *data)
+{
+	free(data->east);
+	free(data->ceilling);
+	free(data->floor);
+	free(data->north);
+	free(data->south);
+	free(data->west);
+	free(data->map_data);
+	free(data);
+}
 
 int	main(int ac, char **av)
 {
@@ -62,9 +61,9 @@ int	main(int ac, char **av)
 	if (!all_data)
 		error("all_data_malloc_error\n");
 	all_data_group(global, all_data);
-	//free_global(global);
+	free_global(global);
 	drow_image(all_data);
-	mlx_loop_hook(all_data->mlx, mouse_hook, all_data);
+	mlx_loop_hook(all_data->mlx, lh_events, all_data);
 	mlx_hook(all_data->win, 2, 0, key_hook, all_data);
 	mlx_hook(all_data->win, 17, 0, event_hook, all_data);
 	mlx_loop(all_data->mlx);

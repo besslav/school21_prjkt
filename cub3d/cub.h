@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 18:28:26 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 21:29:15 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/26 20:00:22 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ typedef struct s_ray
 	float	y_ray_len;
 }	t_ray;
 
+typedef struct s_doors
+{
+	int				door_pos;
+	int				time_open;
+	struct s_doors	*next_door;
+}	t_doors;
+
+
 typedef struct s_game_data
 {
 	float	alpha_player;
@@ -77,6 +85,7 @@ typedef struct s_game_data
 	int		side;
 	float	x_img_pos;
 	int		x_mouse;
+	t_doors	*doors;
 }	t_game_data;
 
 typedef struct s_img_data
@@ -134,9 +143,11 @@ float	ray_len(t_game_data *game, float alpha);
 void	drow_line_of_wall(int h_wall, int x, t_all_data *all_data);
 void	drow_image(t_all_data *all_data);
 
-int		mouse_hook(t_all_data *all_data);
+int		lh_events(t_all_data *all_data);
+void	mouse_hook(t_all_data *all_data);
 int		key_hook(int key, t_all_data *all_data);
 int		event_hook(void);
+int		doors_closer(t_game_data *game);
 
 void	drow_minimap(t_all_data *all_data);
 

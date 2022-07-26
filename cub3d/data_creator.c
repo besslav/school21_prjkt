@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:44:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 21:57:33 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/25 22:09:46 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	game_data_collect(t_global *info, t_game_data *game)
 	game->map = info->map_data->points;
 	game->x_len = info->map_data->x_len;
 	game->y_len = info->map_data->y_len;
+	game->doors = NULL;
 }
 
 void	screen_data_collect(t_img_data *img_data, t_all_data *all_data)

@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:04:21 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 21:31:19 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/25 21:14:20 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static int	is_wall(t_ray *ray, float alpha, t_game_data *game_data, char x_y)
 	if (x_y == 'x' && ray->x_dir == -1)
 		x -= 1;
 	y += 0.000001;
-	if (game_data->map[array_pos((int)x, (int)y, game_data->x_len)] == '1')
+	if (game_data->map[array_pos((int)x, (int)y, game_data->x_len)] == '1'
+		|| game_data->map[array_pos((int)x, (int)y, game_data->x_len)] == '2')
 		return (1);
 	return (0);
 }
