@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:51:18 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/26 18:15:36 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 15:16:29 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ void	drow_line_of_wall(int h_wall, int screen_x, t_all_data *all_data)
 {
 	t_drow		drow;
 	int			i;
-	int			side;
-	t_img_data	*wall;
+	t_img_data	wall;
 
-	wall = all_data->textures->wall_textures;
-	side = all_data->game_data->side;
-	drow.x_in_img = wall[side].width
+	wall = all_data->textures->wall_textures[all_data->game_data->side];
+	drow.x_in_img = wall.width
 		* (all_data->game_data->x_img_pos);
-	drow.step = (float)wall[side].height / (float)h_wall;
+	drow.step = (float)wall.height / (float)h_wall;
 	drow.y_start = (HEIGHT - h_wall) / 2;
 	i = -1;
 	drow.y_in_img = 0;
@@ -44,7 +42,7 @@ void	drow_line_of_wall(int h_wall, int screen_x, t_all_data *all_data)
 	}
 	while (++i < h_wall)
 	{
-		drow.color = get_pixel_color_from_img(&wall[side],
+		drow.color = get_pixel_color_from_img(&wall,
 				drow.x_in_img, drow.y_in_img);
 		put_pixel(screen_x, drow.y_start + i,
 			all_data->screen_img_data, drow.color);

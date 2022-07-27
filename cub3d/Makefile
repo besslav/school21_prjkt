@@ -7,7 +7,7 @@ SRCS = 	cub.c \
 		data_creator.c events.c\
 		game_drow_start.c game_drow_fl_ceil.c game_utils.c game_wall_drow.c game_throw_rays.c game_get_ray.c\
 		errors_cleaners.c\
-		game_drow_minimap.c
+		game_drow_minimap.c game_doors.c
 
 
 OBJ = ${SRCS:%.c=%.o}

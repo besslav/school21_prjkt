@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 20:07:45 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 20:09:48 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 15:27:59 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,16 @@ static void	ways_checker(int pos, t_map *map)
 		|| pos + map->x_len > map->x_len * map->y_len)
 		error("not_closed_map");
 	map->walid_visited[pos] = 1;
-	if ((map->points[pos - map->x_len] == '0'
-			|| map->points[pos - map->x_len] == ' ')
+	if (map->points[pos - map->x_len] != '1'
 		&& !map->walid_visited[pos - map->x_len])
 		ways_checker(pos - map->x_len, map);
-	if ((map->points[pos + map->x_len] == '0'
-			|| map->points[pos + map->x_len] == ' ')
+	if (map->points[pos + map->x_len] != '1'
 		&& !map->walid_visited[pos + map->x_len])
 		ways_checker(pos + map->x_len, map);
-	if ((map->points[pos - 1] == '0' || map->points[pos - 1] == ' ')
+	if (map->points[pos - 1] != '1'
 		&& !map->walid_visited[pos - 1])
 		ways_checker(pos - 1, map);
-	if ((map->points[pos + 1] == '0' || map->points[pos + 1] == ' ')
+	if (map->points[pos + 1] != '1'
 		&& !map->walid_visited[pos + 1])
 		ways_checker(pos + 1, map);
 }

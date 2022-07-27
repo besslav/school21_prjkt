@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 18:28:26 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/26 20:00:22 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 15:17:31 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ typedef struct s_doors
 	int				door_pos;
 	int				time_open;
 	struct s_doors	*next_door;
+	struct s_doors	*prev_door;
 }	t_doors;
-
 
 typedef struct s_game_data
 {
@@ -150,5 +150,7 @@ int		event_hook(void);
 int		doors_closer(t_game_data *game);
 
 void	drow_minimap(t_all_data *all_data);
+void	try_open_door(t_game_data *game);
+int		doors_closer(t_game_data *game);
 
 #endif
