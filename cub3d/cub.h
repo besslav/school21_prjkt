@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 18:28:26 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 16:00:26 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 20:23:17 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,13 @@ void	cleaner(char **spl);
 int		newcolor(int r, int g, int b);
 int		array_pos(int x, int y, int x_len);
 void	put_pixel(int x, int y, t_img_data *img_data, int color);
+void	check_color_len(char **color);
 
 void	all_data_group(t_global *global, t_all_data *all_data);
 void	pars_colors_line(t_global *data, t_textures *game);
 void	drow_back(t_img_data *img_data, t_textures *color);
 void	throw_rays(t_all_data *all_data);
-float	ray_len(t_game_data *game, float alpha);
+float	ray_cycle(t_ray *ray_info, t_game_data *game_data, float alpha);
 void	drow_line_of_wall(int h_wall, int x, t_all_data *all_data);
 void	drow_image(t_all_data *all_data);
 
@@ -148,6 +149,10 @@ void	mouse_hook(t_all_data *all_data);
 int		key_hook(int key, t_all_data *all_data);
 int		event_hook(void);
 int		doors_closer(t_game_data *game);
+void	add_door_textur(
+			t_img_data **wall_textures, t_global *global, void *mlx);
+int		find_door(t_game_data *game);
+float	get_len_of_ray(char x_y, t_ray *ray);
 
 void	drow_minimap(t_all_data *all_data);
 void	try_open_door(t_game_data *game);

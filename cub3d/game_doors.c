@@ -6,11 +6,28 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 14:59:55 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 15:19:03 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 20:17:10 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+void	add_door_textur(
+	t_img_data **wall_textures, t_global *global, void *mlx)
+{
+	char	*door;
+
+	door = "./textures/door.xpm";
+	(*wall_textures)[4].img = mlx_xpm_file_to_image(mlx, door,
+			&(*wall_textures)[4].width, &(*wall_textures)[4].height);
+	if (!(*wall_textures)[4].img)
+		error("door_textur_error\n");
+	(*wall_textures)[4].addr = mlx_get_data_addr
+		((*wall_textures)[4].img, &(*wall_textures)[4].bits_per_pixel,
+			&(*wall_textures)[4].line_length, &(*wall_textures)[4].endian);
+	if (!(*wall_textures)[4].addr)
+		error("door_texturs_init_addr_error\n");
+}
 
 t_doors	*door_init(int pos)
 {

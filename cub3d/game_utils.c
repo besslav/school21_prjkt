@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:33:56 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 20:12:12 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 20:15:31 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,18 @@ void	put_pixel(int x, int y, t_img_data *img_data, int color)
 				+ x * (img_data->bits_per_pixel / 8));
 		*(unsigned int *) dst = color;
 	}
+}
+
+int	find_door(t_game_data *game)
+{
+	game->side = 4;
+	return (1);
+}
+
+float	get_len_of_ray(char x_y, t_ray *ray)
+{
+	if (x_y == 'x')
+		return (ray->x_ray_len);
+	else if (x_y == 'y')
+		return (ray->y_ray_len);
 }

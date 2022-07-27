@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:04:21 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/25 21:14:20 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 20:20:30 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,25 @@ static int	is_wall(t_ray *ray, float alpha, t_game_data *game_data, char x_y)
 	float		y;
 	float		len;
 
-	if (x_y == 'x')
-		len = ray->x_ray_len;
-	else if (x_y == 'y')
-		len = ray->y_ray_len;
+	len = get_len_of_ray(x_y, ray);
 	x = (game_data->x_player + cosf(alpha) * len);
 	y = (game_data->y_player - sinf(alpha) * len);
 	if (x_y == 'x')
 		game_data->x_img_pos = y - floor(y);
 	else
 		game_data->x_img_pos = x - floor(x);
-	game_data->side = get_side(ray, x_y);
 	if (x_y == 'y' && ray->y_dir == -1)
 		y -= 1;
 	if (x_y == 'x' && ray->x_dir == -1)
 		x -= 1;
 	y += 0.000001;
-	if (game_data->map[array_pos((int)x, (int)y, game_data->x_len)] == '1'
-		|| game_data->map[array_pos((int)x, (int)y, game_data->x_len)] == '2')
+	if (game_data->map[array_pos((int)x, (int)y, game_data->x_len)] == '1')
+	{
+		game_data->side = get_side(ray, x_y);
 		return (1);
+	}
+	if (game_data->map[array_pos((int)x, (int)y, game_data->x_len)] == '2')
+		return (find_door(game_data));
 	return (0);
 }
 
@@ -74,7 +74,7 @@ static void	ray_info_val_upd(t_ray *ray_info,
 	}
 }
 
-static float	ray_cycle(t_ray *ray_info, t_game_data *game_data, float alpha)
+float	ray_cycle(t_ray *ray_info, t_game_data *game_data, float alpha)
 {
 	while (ray_info->x_ray_len < 20 || ray_info->y_ray_len < 20)
 	{
@@ -94,25 +94,4 @@ static float	ray_cycle(t_ray *ray_info, t_game_data *game_data, float alpha)
 		}
 	}
 	return (-1);
-}
-
-float	ray_len(t_game_data *game, float alpha)
-{
-	t_ray	ray_info;
-
-	ray_info.x_dir = 1;
-	ray_info.y_dir = 1;
-	ray_info.x_pos = floor(game->x_player);
-	ray_info.y_pos = floor(game->y_player);
-	if (sin(alpha) > 0)
-		ray_info.y_dir = -1;
-	if (cos(alpha) < 0)
-		ray_info.x_dir = -1;
-	if (ray_info.x_dir == 1)
-		ray_info.x_pos += 1;
-	if (ray_info.y_dir == 1)
-		ray_info.y_pos += 1;
-	ray_info.x_ray_len = (ray_info.x_pos - game->x_player) / cosf(alpha);
-	ray_info.y_ray_len = (game->y_player - ray_info.y_pos) / sinf(alpha);
-	return (ray_cycle(&ray_info, game, alpha));
 }

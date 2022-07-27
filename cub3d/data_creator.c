@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:44:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/25 22:09:46 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 20:22:46 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ void	pars_colors_line(t_global *data, t_textures *game)
 
 	splited_color_line = ft_split(data->ceilling, ',');
 	i = -1;
+	check_color_len(splited_color_line);
 	while (++i < 3)
 		int_line[i] = ft_atoi(splited_color_line[i]);
 	game->ceilling_color = newcolor(int_line[0], int_line[1], int_line[2]);
 	cleaner(splited_color_line);
 	splited_color_line = ft_split(data->floor, ',');
 	i = -1;
+	check_color_len(splited_color_line);
 	while (++i < 3)
 		int_line[i] = ft_atoi(splited_color_line[i]);
 	game->floor_color = newcolor(int_line[0], int_line[1], int_line[2]);
@@ -80,7 +82,7 @@ void	textur_data_collect(
 	dirs[SOUTH] = global->south;
 	dirs[EAST] = global->east;
 	dirs[WEST] = global->west;
-	*wall_textures = (t_img_data *) malloc(4 * sizeof(t_img_data));
+	*wall_textures = (t_img_data *) malloc(5 * sizeof(t_img_data));
 	if (!wall_textures)
 		error("textur_init_error\n");
 	i = -1;
@@ -119,6 +121,7 @@ void	all_data_group(t_global *global, t_all_data *all_data)
 		error("img_malloc error\n");
 	pars_colors_line(global, texturs);
 	textur_data_collect(&texturs->wall_textures, global, all_data->mlx);
+	add_door_textur(&texturs->wall_textures, global, all_data->mlx);
 	mlx_mouse_get_pos(all_data->win, &game->x_mouse, &y);
 	all_data->game_data = game;
 	all_data->screen_img_data = img_data;
