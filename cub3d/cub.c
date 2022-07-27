@@ -6,17 +6,28 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:22 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/26 19:03:28 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 20:28:57 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+static void	check_name(char *name)
+{
+	int	i;
+
+	i = ft_strlen(name);
+	if (name[i-1] != 'b' || name[i-2] != 'u'
+		|| name[i-3] != 'c' || name[i-4] != '.')
+		error("bad_file_name\n");
+}
 
 void	*map_open(char *file_name, t_global	*global)
 {
 	int			fd;
 	char		*line;
 
+	check_name(file_name);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		error("the map cannot be opened\n");
