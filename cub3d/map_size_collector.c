@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 17:09:44 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/24 20:11:46 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 15:59:20 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ t_map	*get_size(int fd, char *line)
 		free(line);
 		line = get_next_line(fd);
 	}
-	free(line);
+	if (line)
+	{
+		free(line);
+		check_after_empty_line(fd);
+	}
 	return (map);
 }
