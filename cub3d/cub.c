@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:22 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 20:28:57 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/27 20:30:39 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	check_name(char *name)
 	int	i;
 
 	i = ft_strlen(name);
-	if (name[i-1] != 'b' || name[i-2] != 'u'
-		|| name[i-3] != 'c' || name[i-4] != '.')
+	if (name[i - 1] != 'b' || name[i - 2] != 'u'
+		|| name[i - 3] != 'c' || name[i - 4] != '.')
 		error("bad_file_name\n");
 }
 
