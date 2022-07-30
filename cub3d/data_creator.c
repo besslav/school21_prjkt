@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 16:44:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 20:22:46 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/30 17:26:21 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	game_data_collect(t_global *info, t_game_data *game)
 	if (info->map_data->dir == 'W')
 		game->alpha_player = M_PI;
 	else if (info->map_data->dir == 'E')
-		game->alpha_player = 0;
+		game->alpha_player = M_PI * 2;
 	else if (info->map_data->dir == 'N')
 		game->alpha_player = M_PI_2;
 	else if (info->map_data->dir == 'S')

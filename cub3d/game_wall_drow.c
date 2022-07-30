@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:51:18 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 15:16:29 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/30 18:56:45 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ static int	get_pixel_color_from_img(t_img_data *textura, int x, int y)
 	return (*(int *)pixel);
 }
 
+static float	x_in_img_finder(int	width, float x_ing_pos, int side)
+{
+	float	x;
+	
+	x = width * (x_ing_pos);
+	if (side == WEST || side == SOUTH)
+		x = 1 - x;
+	return (x);
+
+}
+
 void	drow_line_of_wall(int h_wall, int screen_x, t_all_data *all_data)
 {
 	t_drow		drow;
@@ -28,8 +39,8 @@ void	drow_line_of_wall(int h_wall, int screen_x, t_all_data *all_data)
 	t_img_data	wall;
 
 	wall = all_data->textures->wall_textures[all_data->game_data->side];
-	drow.x_in_img = wall.width
-		* (all_data->game_data->x_img_pos);
+	drow.x_in_img = x_in_img_finder(wall.width,
+		all_data->game_data->x_img_pos, all_data->game_data->side);
 	drow.step = (float)wall.height / (float)h_wall;
 	drow.y_start = (HEIGHT - h_wall) / 2;
 	i = -1;

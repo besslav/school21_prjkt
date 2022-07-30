@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 20:07:45 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 15:27:59 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/30 19:02:49 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ static void	ways_checker(int pos, t_map *map)
 {
 	if (pos < map->x_len || (pos % map->x_len == 0)
 		|| (pos % map->x_len == map->x_len - 1)
-		|| pos + map->x_len > map->x_len * map->y_len)
-		error("not_closed_map");
+		|| pos + map->x_len > map->x_len * map->y_len
+		|| map->points[pos] == ' ')
+		error("bad_map\n");
 	map->walid_visited[pos] = 1;
 	if (map->points[pos - map->x_len] != '1'
 		&& !map->walid_visited[pos - map->x_len])

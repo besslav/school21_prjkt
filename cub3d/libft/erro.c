@@ -1,39 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   erro.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/23 16:33:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/30 17:29:16 by pskip            ###   ########.fr       */
+/*   Created: 2022/07/30 16:29:52 by pskip             #+#    #+#             */
+/*   Updated: 2022/07/30 16:30:47 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
-int	ft_atoi(char *str)
+void	error_lib(char *err)
 {
-	int		i;
-	int		sign;
-	int		ans;
-
-	ans = 0;
-	i = 0;
-	sign = 1;
-	if ((*(str + i) == '-') || (*(str + i) == '+'))
-	{	
-		if (*(str + i) == '-')
-			sign = sign * -1;
-		i++;
-	}
-	while(str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			error_lib("atoi_error_bad_num\n");
-		ans = (ans * 10) + (*(str + i) - 48);
-		i++;
-	}
-	return (ans * sign);
+	write(2, err, ft_strlen(err));
+	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 18:28:26 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 20:23:17 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/30 19:05:06 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIDTH		1000
 # define HEIGHT		800
 # define ALPHA_DIF	0.6
-# define STEP		0.15
+# define STEP		0.30
 # define _USE_MATH_DEFINES
 # define NORTH	0
 # define SOUTH	1

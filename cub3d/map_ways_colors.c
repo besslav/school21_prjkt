@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 15:52:53 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/25 21:46:48 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/30 17:25:43 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ static char	*mall_zone(char *zone, char *for_save)
 	if (!zone)
 		error("malloc_dir_or_collor\n");
 	i = 0;
-	while (for_save[i] && for_save[i] != '\n')
+	while (for_save[i])
 	{
-		zone[i] = for_save[i];
+		if (for_save[i] == '\n')
+			zone[i] = '\0';
+		else
+			zone[i] = for_save[i];
 		i++;
 	}
 	return (zone);

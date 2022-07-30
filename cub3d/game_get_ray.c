@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 21:04:21 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 20:20:30 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/30 18:48:07 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ static int	get_side(t_ray *ray, char x_y)
 	if (ray->x_dir == 1)
 	{
 		if (x_y == 'x')
-			return (WEST);
+			return (EAST);
 		if (ray->y_dir == 1)
-			return (NORTH);
-		return (SOUTH);
+			return (SOUTH);
+		return (NORTH);
 	}
 	if (x_y == 'x')
-		return (EAST);
+		return (WEST);
 	if (ray->y_dir == 1)
-		return (NORTH);
-	return (SOUTH);
+		return (SOUTH);
+	return (NORTH);
 }
 
 static int	is_wall(t_ray *ray, float alpha, t_game_data *game_data, char x_y)
@@ -47,6 +47,7 @@ static int	is_wall(t_ray *ray, float alpha, t_game_data *game_data, char x_y)
 	if (x_y == 'x' && ray->x_dir == -1)
 		x -= 1;
 	y += 0.000001;
+	x += 0.000001;
 	if (game_data->map[array_pos((int)x, (int)y, game_data->x_len)] == '1')
 	{
 		game_data->side = get_side(ray, x_y);
