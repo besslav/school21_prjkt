@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 16:33:32 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/30 17:29:16 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/31 20:12:53 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_atoi(char *str)
 			sign = sign * -1;
 		i++;
 	}
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
 			error_lib("atoi_error_bad_num\n");

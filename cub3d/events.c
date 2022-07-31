@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 20:49:05 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 15:22:24 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/30 19:08:58 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int	key_hook(int key, t_all_data *all_data)
 	if (key == 2)
 		count_new_player_pos(all_data->game_data, -M_PI_2);
 	if (key == 123)
-		all_data->game_data->alpha_player += 0.05;
+		all_data->game_data->alpha_player += STEP_ALPHA;
 	if (key == 124)
-		all_data->game_data->alpha_player -= 0.05;
+		all_data->game_data->alpha_player -= STEP_ALPHA;
 	drow_image(all_data);
 	return (0);
 }

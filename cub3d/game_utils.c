@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:33:56 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 20:15:31 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/31 20:03:43 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ float	get_len_of_ray(char x_y, t_ray *ray)
 {
 	if (x_y == 'x')
 		return (ray->x_ray_len);
-	else if (x_y == 'y')
-		return (ray->y_ray_len);
+	return (ray->y_ray_len);
 }

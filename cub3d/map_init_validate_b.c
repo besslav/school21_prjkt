@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 19:40:51 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/31 20:23:40 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/25 21:48:09 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	is_start_correct(char elem, t_map *map, int pos)
 		map->start = pos;
 		map->dir = elem;
 	}
-	else if (elem != '0' && elem != '1' && elem != ' ')
+	else if (elem != '0' && elem != '1' && elem != ' ' && elem != '2')
 		error("unknown_litera_in_map\n");
 }
 

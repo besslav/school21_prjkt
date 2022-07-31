@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 18:28:26 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/30 19:05:06 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/31 22:06:17 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define WIDTH		1000
-# define HEIGHT		800
+# define WIDTH		800
+# define HEIGHT		600
 # define ALPHA_DIF	0.6
 # define STEP		0.30
+# define STEP_ALPHA	0.15
 # define _USE_MATH_DEFINES
 # define NORTH	0
 # define SOUTH	1
@@ -135,6 +136,7 @@ int		newcolor(int r, int g, int b);
 int		array_pos(int x, int y, int x_len);
 void	put_pixel(int x, int y, t_img_data *img_data, int color);
 void	check_color_len(char **color);
+int		len_file_way(char *str);
 
 void	all_data_group(t_global *global, t_all_data *all_data);
 void	pars_colors_line(t_global *data, t_textures *game);
@@ -150,7 +152,7 @@ int		key_hook(int key, t_all_data *all_data);
 int		event_hook(void);
 int		doors_closer(t_game_data *game);
 void	add_door_textur(
-			t_img_data **wall_textures, t_global *global, void *mlx);
+			t_img_data **wall_textures, void *mlx);
 int		find_door(t_game_data *game);
 float	get_len_of_ray(char x_y, t_ray *ray);
 

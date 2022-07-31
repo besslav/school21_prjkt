@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 19:52:49 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 20:20:27 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/31 20:04:14 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ void	throw_rays(t_all_data *all_data)
 {
 	float	step_alpha;
 	int		i;
-	float	y_step;
-	float	alpha;
 
 	i = 0;
 	step_alpha = ALPHA_DIF / (WIDTH / 2);

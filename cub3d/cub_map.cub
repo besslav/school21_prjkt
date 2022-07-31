@@ -1,7 +1,9 @@
-    NO ./textures/wall.xpm
-EA ./textures/wall2.xpm
-SO    ./textures/text.xpm  
-WE ./textures/text.xpm
+  NO ./textures/wall.xpm          
+EA ./textures/wall2.xpm          
+
+    SO ./textures/wall3.xpm
+
+WE ./textures/wall4.xpm
 
 
 F 0,200,100

@@ -6,7 +6,7 @@
 /*   By: pskip <pskip@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 12:06:22 by pskip             #+#    #+#             */
-/*   Updated: 2022/07/27 20:30:39 by pskip            ###   ########.fr       */
+/*   Updated: 2022/07/31 20:02:16 by pskip            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	check_name(char *name)
 		error("bad_file_name\n");
 }
 
-void	*map_open(char *file_name, t_global	*global)
+static void	map_open(char *file_name, t_global	*global)
 {
 	int			fd;
 	char		*line;

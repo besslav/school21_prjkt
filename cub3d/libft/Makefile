@@ -26,24 +26,17 @@ HEADER		= libft.h
 
 .PHONY : all clean fclean re
 
-all : print_title $(NAME)
-
-print_title :
-	@echo "\033[3;37mCompiling FT library... \033[0m"
+all :  $(NAME)
 
 $(NAME) : $(OBJS) $(HEADER)
 	@ar rcs $(NAME) $(OBJS)
-	@echo "\033[3;37m\n                                  100% done\033[0m"
 
 $(OBJS) : %.o : %.c $(HEADER)
 	@$(CC) -c $(CFLAGS) $< -o $@
-	@printf "\033[3;37m█\033[0m"
 
 clean :
 	@rm -rf $(OBJS)
-	@echo "\033[3;37mFT library: object files removed\033[0m"
 fclean :
 	@rm -rf $(OBJS) $(NAME)
-	@echo "\033[3;37mFT library: all files removed\033[0m"
 
 re : fclean all
