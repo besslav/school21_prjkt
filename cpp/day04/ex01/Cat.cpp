@@ -16,6 +16,9 @@ Cat::Cat(const Cat &copy) : Animal(copy._type) {
 
 Cat &Cat::operator=(const Cat &copy) {
 	std::cout << "Copy operator Cat" << std::endl;
+	if (this == &copy)
+		return (*this);
+	delete (this->_brain);
 	this->_type = copy._type;
 	this->_brain = new Brain(*copy._brain);
 	return *this;

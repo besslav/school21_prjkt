@@ -10,9 +10,8 @@ Dog::Dog(){
 	std::cout << "Constructor Dog" << std::endl;
 }
 
-Dog::Dog(const Dog &copy){
+Dog::Dog(const Dog &copy): AAnimal(copy){
 	std::cout << "Copy constructor Dog" << std::endl;
-	this->_type = copy._type;
 	this->_brain = new Brain(*copy._brain);
 }
 

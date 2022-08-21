@@ -8,7 +8,7 @@ Bureaucrat::Bureaucrat() : _name("Default Name"), _grade(150) {
 	std::cout << "Default constructor Bureaucrat" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
+Bureaucrat::Bureaucrat(const std::string& name,const int& grade) : _name(name) {
 	if (grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	else if (grade > 150)
@@ -64,6 +64,8 @@ void Bureaucrat::signForm(Form &form) {
 	}
 }
 
+//----------------Exception------------------------
+
 const char *Bureaucrat::GradeTooLowException::what() const throw() {
 	return "Exceptions: grade > 150";
 }
@@ -71,6 +73,8 @@ const char *Bureaucrat::GradeTooLowException::what() const throw() {
 const char *Bureaucrat::GradeTooHighException::what() const throw() {
 	return "Exceptions: grade < 1";
 }
+
+//------------------  << ----------------------
 
 std::ostream & operator << (std::ostream &out, const Bureaucrat &bureaucrat) {
 	out << bureaucrat.getName() + ", bureaucrat grade " << bureaucrat.getGrade() << std::endl;

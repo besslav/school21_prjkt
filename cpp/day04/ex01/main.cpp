@@ -1,6 +1,9 @@
 #include "Cat.h"
 #include "Dog.h"
 
+# define ANIMAL_COUNT 10
+# define SEPARATOR "------------------------------"
+
 int main()
 {
 	const Animal* meta = new Animal();
@@ -15,8 +18,20 @@ int main()
 	delete(j);
 	delete(i);
 
-
-
+	Animal *animals[ANIMAL_COUNT];
+	for (int k = 0; k < ANIMAL_COUNT; ++k) {
+		std::cout << k << SEPARATOR << std::endl;
+		if (k < ANIMAL_COUNT / 2)
+			animals[k] = new Dog();
+		else
+			animals[k] = new Cat();
+		std::cout << k << SEPARATOR << std::endl;
+	}
+	for (int k = 0; k < ANIMAL_COUNT; ++k) {
+		std::cout << k << SEPARATOR << std::endl;
+		delete animals[k];
+		std::cout << k << SEPARATOR << std::endl;
+	}
 
 	return 0;
 }

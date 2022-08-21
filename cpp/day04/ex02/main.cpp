@@ -13,7 +13,9 @@ int main()
 	delete(j);
 	delete(i);
 
-
+	//const AAnimal* k = new AAnimal();
+	//std::cout << k->getType() << " " << std::endl;
+	//k->makeSound();
 
 
 	return 0;

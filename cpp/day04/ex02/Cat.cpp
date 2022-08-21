@@ -10,10 +10,9 @@ Cat::Cat(){
 	std::cout << "Constructor Cat" << std::endl;
 }
 
-Cat::Cat(const Cat &copy) {
+Cat::Cat(const Cat &copy): AAnimal(copy) {
 	std::cout << "Copy constructor Cat" << std::endl;
 	this->_brain = new Brain(*copy._brain);
-	this->_type = copy._type;
 }
 
 Cat &Cat::operator=(const Cat &copy) {

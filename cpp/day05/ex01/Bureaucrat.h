@@ -14,7 +14,7 @@ class Form;
 class Bureaucrat {
 public:
 	Bureaucrat();
-	Bureaucrat(std::string, int);
+	Bureaucrat(const std::string&,const int&);
 	Bureaucrat(Bureaucrat const &);
 	Bureaucrat& operator=(Bureaucrat const &);
 	~Bureaucrat();

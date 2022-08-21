@@ -1,0 +1,8 @@
+# ninja log v5
+1	717	1661002370000000000	CMakeFiles/ex02.dir/PresidentialPardonForm.cpp.o	819a12ca1a4b1a7f
+1	718	1661002370000000000	CMakeFiles/ex02.dir/RobotomyRequestForm.cpp.o	7fbdb70276f4a3db
+1	721	1661002370000000000	CMakeFiles/ex02.dir/AForm.cpp.o	58f7f1de93fddb8c
+1	726	1661002370000000000	CMakeFiles/ex02.dir/Bureaucrat.cpp.o	9d3484c184fe56d2
+0	827	1661002370000000000	CMakeFiles/ex02.dir/main.cpp.o	a2b52138ed353db8
+2	909	1661002371000000000	CMakeFiles/ex02.dir/ShrubberyCreationForm.cpp.o	b0bd7690cc8fd08e
+909	959	1661002371000000000	ex02	b9ddd69e8bdaa57f

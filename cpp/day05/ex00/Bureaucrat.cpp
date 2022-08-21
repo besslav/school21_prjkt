@@ -4,7 +4,7 @@
 
 #include "Bureaucrat.h"
 
-Bureaucrat::Bureaucrat() : _name("Default Name"), _grade(150) {
+Bureaucrat::Bureaucrat() : _name("Default_Name"), _grade(150) {
 	std::cout << "Default constructor Bureaucrat" << std::endl;
 }
 
@@ -25,6 +25,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &copy) : _name(copy._name), _grade(copy.
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy) {
 	std::cout << "Copy operator Bureaucrat: " + _name << std::endl;
+	this->_name = copy._name;
 	this->_grade = copy.getGrade();
 	return *this;
 }

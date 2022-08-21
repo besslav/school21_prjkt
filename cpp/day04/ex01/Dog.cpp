@@ -16,6 +16,9 @@ Dog::Dog(const Dog &copy) : Animal(copy) {
 
 Dog &Dog::operator=(const Dog &copy) {
 	std::cout << "Copy operator Dog" << std::endl;
+	if (this == &copy)
+		return (*this);
+	delete (this->_brain);
 	this->_type = copy.getType();
 	this->_brain = new Brain(copy.getBrain());
 	return *this;
