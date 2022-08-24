@@ -1,3 +1,0 @@
-/Users/pskip/day05/ex03/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/pskip/day05/ex03/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/pskip/day05/ex03/cmake-build-debug/CMakeFiles/ex03.dir
