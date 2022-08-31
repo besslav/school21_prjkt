@@ -1,7 +1,3 @@
-//
-// Created by Yeast Maragret on 8/3/22.
-//
-
 #include "RobotomyRequestForm.h"
 
 RobotomyRequestForm::RobotomyRequestForm() : AForm("RobotomyRequestForm", 72, 45),

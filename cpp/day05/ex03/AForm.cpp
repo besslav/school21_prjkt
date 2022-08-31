@@ -1,7 +1,3 @@
-//
-// Created by Yeast Maragret on 8/2/22.
-//
-
 #include "AForm.h"
 
 AForm::AForm() : _name("Default form"), _isSigned(false), _gradeSign(1), _gradeExecute(1) {

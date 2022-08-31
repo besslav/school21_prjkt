@@ -1,7 +1,3 @@
-//
-// Created by Yeast Maragret on 8/1/22.
-//
-
 #include "Bureaucrat.h"
 
 Bureaucrat::Bureaucrat() : _name("Default Name"), _grade(150) {

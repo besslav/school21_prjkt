@@ -1,7 +1,3 @@
-//
-// Created by Yeast Maragret on 8/3/22.
-//
-
 #include "ShrubberyCreationForm.h"
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm("ShrubberyCreationForm", 145, 137),

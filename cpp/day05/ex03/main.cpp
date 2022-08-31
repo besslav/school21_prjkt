@@ -1,7 +1,3 @@
-//
-// Created by Yeast Maragret on 8/1/22.
-//
-
 #include "Bureaucrat.h"
 #include "PresidentialPardonForm.h"
 #include "RobotomyRequestForm.h"

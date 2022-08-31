@@ -1,7 +1,3 @@
-//
-// Created by Yeast Maragret on 8/3/22.
-//
-
 #include "Intern.h"
 
 Intern::Intern() {

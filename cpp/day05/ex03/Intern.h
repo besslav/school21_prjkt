@@ -1,7 +1,3 @@
-//
-// Created by Yeast Maragret on 8/3/22.
-//
-
 #ifndef PISCINE_CPP_INTERN_H
 #define PISCINE_CPP_INTERN_H
 

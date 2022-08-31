@@ -1,7 +1,3 @@
-//
-// Created by Yeast Maragret on 8/3/22.
-//
-
 #include "PresidentialPardonForm.h"
 
 PresidentialPardonForm::PresidentialPardonForm() : AForm("PresidentialPardonForm", 25, 5),
